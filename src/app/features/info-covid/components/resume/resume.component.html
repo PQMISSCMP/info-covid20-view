@@ -1,0 +1,38 @@
+<h2 *ngIf="actualizacionesResume.length > 0">Information of the COVID-19 virus in the world</h2>
+<ngx-spinner></ngx-spinner>
+<table class="table table-responsive table-sm" style = "border: 1px solid #ddd" *ngIf="actualizacionesResume.length > 0">
+  <thead>
+    <tr>
+      <th scope="col">Country</th>
+      <th scope="col">Total infected</th>
+      <th scope="col">total dead † </th>
+      <th scope="col"> % </th>
+      <th scope="col">last infected</th>
+      <th scope="col">last dead †</th>
+      <th scope="col">info</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor = "let actualizacion of actualizacionesResume">
+      <td style = "width: 130px;"><a routerLink="/pais/{{ actualizacion.Lugar }}">{{ actualizacion.lugar }}</a></td>
+      <td style = "width: 80px;">{{ actualizacion.totalContagiados | number:'1.0-0' }}</td>
+      <td style = "width: 70px;">{{ actualizacion.totalDecesos | number:'1.0-0' }}  </td>
+      <td style = "width: 60px;">{{ actualizacion.porcent }}%</td>
+      <td style = "width: 80px;">
+
+        <div title="last value: {{ actualizacion.nroContagiadosAnt }}">{{ actualizacion.ultContagiados | number:'1.0-0' }}
+          <span *ngIf="actualizacion.statusContagiados === 'SUBE'"><span class="material-icons sube" >call_made</span></span>
+          <span *ngIf="actualizacion.statusContagiados === 'BAJA'"><span class="material-icons baja" >call_received</span></span>
+        </div>
+      </td>
+      <td>
+        <div title="last value: {{ actualizacion.nroDecesosAnt }}">
+          {{ actualizacion.ultDecesos | number:'1.0-0' }}
+          <span *ngIf="actualizacion.statusDecesos === 'SUBE'"><span class="material-icons sube">call_made</span></span>
+          <span *ngIf="actualizacion.statusDecesos === 'BAJA'"><span class="material-icons baja">call_received</span></span>
+        </div>
+      </td>
+      <td>Last update {{ actualizacion.horasDesdeUltActualiza }} ago</td>
+    </tr>
+  </tbody>
+</table> 

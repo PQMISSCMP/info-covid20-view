@@ -1,0 +1,26 @@
+<h2 *ngIf="cContagiadosPais.length > 0">Charts</h2>
+
+<div class="chart-wrapper" *ngIf="cContagiadosPais.length > 0">
+  
+  <ngx-spinner></ngx-spinner>
+  <canvas baseChart 
+      [datasets]="ChartDataContagiados" 
+      [labels]="ChartLabelsContagiados" 
+      [options]="ChartOptions"
+      [colors]="chartColorsContagiados" 
+      [legend]="ChartLegend" 
+      [chartType]="ChartType" 
+      [plugins]="ChartPlugins">
+  </canvas>
+  <br>
+  <canvas baseChart 
+      [datasets]="ChartDataDecesos" 
+      [labels]="ChartLabelsDecesos" 
+      [options]="ChartOptions"
+      [colors]="chartColorsDecesos" 
+      [legend]="ChartLegend" 
+      [chartType]="ChartType" 
+      [plugins]="ChartPlugins">
+  </canvas>
+
+</div>
