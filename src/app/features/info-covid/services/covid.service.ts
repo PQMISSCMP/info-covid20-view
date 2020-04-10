@@ -2,8 +2,6 @@ import { Injectable } from '@angular/core';
 import request from 'axios';
 import { CasosResume } from '../model/interfaces';
 
-
-
 @Injectable({
   providedIn: 'root'
 })
@@ -17,9 +15,13 @@ export class CovidService {
   }
 
   async getHistoryList(): Promise <CasosResume[]> {
-    const result: CasosResume[] = await (await request.get(`${this.URL_API}/cases`)).data;
-    
-    return result;
+    try {
+      const result: CasosResume[] = await (await request.get(`${this.URL_API}/cases`)).data;
+      return result;
+    } catch (error) {
+      console.log('reintentando....');
+      this.getHistoryList();
+    }
   }
 
 

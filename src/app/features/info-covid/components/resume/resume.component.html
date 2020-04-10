@@ -1,38 +1,68 @@
-<h2 *ngIf="actualizacionesResume.length > 0">Information of the COVID-19 virus in the world</h2>
 <ngx-spinner></ngx-spinner>
-<table class="table table-responsive table-sm" style = "border: 1px solid #ddd" *ngIf="actualizacionesResume.length > 0">
-  <thead>
-    <tr>
-      <th scope="col">Country</th>
-      <th scope="col">Total infected</th>
-      <th scope="col">total dead † </th>
-      <th scope="col"> % </th>
-      <th scope="col">last infected</th>
-      <th scope="col">last dead †</th>
-      <th scope="col">info</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor = "let actualizacion of actualizacionesResume">
-      <td style = "width: 130px;"><a routerLink="/pais/{{ actualizacion.Lugar }}">{{ actualizacion.lugar }}</a></td>
-      <td style = "width: 80px;">{{ actualizacion.totalContagiados | number:'1.0-0' }}</td>
-      <td style = "width: 70px;">{{ actualizacion.totalDecesos | number:'1.0-0' }}  </td>
-      <td style = "width: 60px;">{{ actualizacion.porcent }}%</td>
-      <td style = "width: 80px;">
+  
+<div *ngIf="actualizacionesResume.length > 0">
+  <br>
+  <p class="h2">Information of the COVID-19 virus in the world </p>
+  
+  <!-- <div style="display: inline-block;"> -->
+  <div ngbTooltip="Cifras globales aproximadas" class="card-header bg-info text-white d-flex">
+    <h1 class="cifras-glob"><span class="badge badge-secondary">{{ totContMundo | number:'1.0-0' }}</span> <span class="text-glob"> total infected</span> </h1>
+    <h1 class="cifras-glob" style="margin-left: 1.5rem;"><span class="badge badge-secondary">{{ totDecMundo | number:'1.0-0' }}</span> <span class="text-glob"> total dead</span> </h1>
+    <h1 class="cifras-glob" style="margin-left: 1.5rem;"><span class="badge badge-secondary">{{ (totDecMundo / totContMundo) * 100 | number:'1.0-0' }}%</span> <span class="text-glob">  percentage</span> </h1>
+    <h1 class="cifras-glob" style="margin-left: 1.5rem;"><span class="badge badge-secondary">1 / {{ (totContMundo / totDecMundo) | number:'1.0-0' }}</span> <span class="text-glob">  relation</span> </h1>
+  </div>
 
-        <div title="last value: {{ actualizacion.nroContagiadosAnt }}">{{ actualizacion.ultContagiados | number:'1.0-0' }}
-          <span *ngIf="actualizacion.statusContagiados === 'SUBE'"><span class="material-icons sube" >call_made</span></span>
-          <span *ngIf="actualizacion.statusContagiados === 'BAJA'"><span class="material-icons baja" >call_received</span></span>
+    <br>
+
+  <table class="table table-striped table-hover">
+    <thead>
+    <tr>
+      <th scope="col" sortable="country" (sort)="onSort($event)">Country</th>
+      <th scope="col" sortable="tinfected" (sort)="onSort($event)">T. infected</th>
+      <th scope="col" sortable="tdead" (sort)="onSort($event)">T. Dead †</th>
+      <th scope="col" sortable="porcent" (sort)="onSort($event)"> % </th>
+      <th scope="col" sortable="linfected" (sort)="onSort($event)"> last infected </th>
+      <th scope="col" sortable="ldead" (sort)="onSort($event)"> last dead †	 </th>
+      <th scope="col" sortable="info" (sort)="onSort($event)"> info </th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let resume of actualizacionesResume">
+      <!-- <td style = "width: 130px;"><a routerLink="/pais/{{ actualizacion.Lugar }}">{{ actualizacion.lugar }}</a></td> -->
+      <td scope="row" style="width: 150px;"><a routerLink="/pais/{{ resume.lugar }}">{{ resume.lugar }}</a></td>
+      <td>
+        <ngb-highlight [result]="resume.totalContagiados | number" [term]="service.searchTerm"></ngb-highlight>
+      </td>
+      <td><ngb-highlight [result]="resume.totalDecesos | number" [term]="service.searchTerm"></ngb-highlight></td>
+      <td><ngb-highlight [result]="resume.porcent | number" [term]="service.searchTerm"></ngb-highlight>%</td>
+     
+      <td>
+        <div *ngIf = "resume.ultContagiados >= 0" ngbTooltip="last value: {{ resume.nroContagiadosAnt }}">
+          {{ resume.ultContagiados | number:'1.0-0' }}
+          <span *ngIf="resume.statusContagiados === 'SUBE'"><span class="material-icons sube" >call_made</span></span>
+          <span *ngIf="resume.statusContagiados === 'BAJA'"><span class="material-icons baja" >call_received</span></span>
         </div>
+
+        <div ngbTooltip="Fix value: {{ resume.ultContagiados }}" *ngIf = "resume.ultContagiados < 0">
+          <span  class="material-icons">check</span>
+        </div>
+
       </td>
       <td>
-        <div title="last value: {{ actualizacion.nroDecesosAnt }}">
-          {{ actualizacion.ultDecesos | number:'1.0-0' }}
-          <span *ngIf="actualizacion.statusDecesos === 'SUBE'"><span class="material-icons sube">call_made</span></span>
-          <span *ngIf="actualizacion.statusDecesos === 'BAJA'"><span class="material-icons baja">call_received</span></span>
+        <div *ngIf = "resume.ultDecesos >= 0" ngbTooltip="last value: {{ resume.nroDecesosAnt }}">
+          {{ resume.ultDecesos | number:'1.0-0' }}
+          <span *ngIf="resume.statusDecesos === 'SUBE'"><span class="material-icons sube">call_made</span></span>
+          <span *ngIf="resume.statusDecesos === 'BAJA'"><span class="material-icons baja">call_received</span></span>
         </div>
+
+        <div ngbTooltip="Fix value: {{ resume.ultDecesos }}" *ngIf = "resume.ultDecesos < 0">
+          <span><span class="material-icons">check</span></span>
+        </div>
+
       </td>
-      <td>Last update {{ actualizacion.horasDesdeUltActualiza }} ago</td>
+      <td><span>Last update {{ resume.horasDesdeUltActualiza }} ago</span></td>
     </tr>
-  </tbody>
-</table> 
+    </tbody>
+  </table>
+
+</div>  

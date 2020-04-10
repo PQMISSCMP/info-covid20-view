@@ -28,7 +28,6 @@ export class GraficoLinealComponent implements OnChanges {
       console.log(p.pais);
 
       const data = await this.getDataChart(p.pais);
-      console.log(data);
 
       window.scroll(0, 0);
       this.spinner.hide();
@@ -63,7 +62,7 @@ export class GraficoLinealComponent implements OnChanges {
 
   ChartLegend = true;
   ChartPlugins = [];
-  ChartType = 'bar';
+  ChartType = 'lineal';
 
   cContagiadosPais: any[];
   ngOnChanges() {

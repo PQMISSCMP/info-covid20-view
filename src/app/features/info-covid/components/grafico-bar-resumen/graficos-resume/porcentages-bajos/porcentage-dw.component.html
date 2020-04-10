@@ -1,0 +1,14 @@
+
+<div class="chart-wrapper" *ngIf="cPorcentagesPais.length > 0">
+  
+  <canvas baseChart 
+      [datasets]="ChartDataPorcentagesDow" 
+      [labels]="ChartLabelsPorcentagesDow" 
+      [options]="ChartOptions"
+      [colors]="chartColorsPorcentDow" 
+      [legend]="ChartLegend" 
+      [chartType]="ChartType" 
+      [plugins]="ChartPlugins">
+  </canvas>
+
+</div>

@@ -1,3 +1,5 @@
+import {SortColumn, SortDirection} from '../directives/sortable.directive';
+
 export interface ResponseDataChart {
     Contagiados: number[];
     Decesos: number[];
@@ -18,6 +20,7 @@ export interface CasosResume {
     tiempoDesdeUltAct: number;
     fechUltActualizacion: Date;
     horasDesdeUltActualiza: string;
+    percentages: PercentageModel[];
 }
 
 export interface Actualizacion {
@@ -27,3 +30,21 @@ export interface Actualizacion {
     Actualizado: Date;
 }
 
+
+export interface SearchResult {
+    resumes: CasosResume[];
+    total: number;
+}
+
+export interface State {
+    page?: number;
+    pageSize?: number;
+    searchTerm?: string;
+    sortColumn: SortColumn;
+    sortDirection: SortDirection;
+}
+
+export interface PercentageModel {
+    percent: string;
+    Fecha: Date;
+}

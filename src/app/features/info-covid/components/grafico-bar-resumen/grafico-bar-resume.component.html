@@ -1,26 +1,9 @@
-<h2 *ngIf="cContagiadosPais.length > 0">Charts</h2>
 
-<div class="chart-wrapper" *ngIf="cContagiadosPais.length > 0">
-  
-  <ngx-spinner></ngx-spinner>
-  <canvas baseChart 
-      [datasets]="ChartDataContagiados" 
-      [labels]="ChartLabelsContagiados" 
-      [options]="ChartOptions"
-      [colors]="chartColorsContagiados" 
-      [legend]="ChartLegend" 
-      [chartType]="ChartType" 
-      [plugins]="ChartPlugins">
-  </canvas>
-  <br>
-  <canvas baseChart 
-      [datasets]="ChartDataDecesos" 
-      [labels]="ChartLabelsDecesos" 
-      [options]="ChartOptions"
-      [colors]="chartColorsDecesos" 
-      [legend]="ChartLegend" 
-      [chartType]="ChartType" 
-      [plugins]="ChartPlugins">
-  </canvas>
+<div class="chart-wrapper" >
+
+    <app-grafico-contagiados [dataContagiados] = "contagiados"></app-grafico-contagiados> <br><br><br><br>
+    <app-grafico-decesos [dataDecesos] = "decesos"></app-grafico-decesos><br><br><br><br>
+    <app-grafico-porcentage-up [dataPorcentagesUp] = "porcentagesUp"></app-grafico-porcentage-up><br><br><br><br>
+    <app-grafico-porcentage-dw [dataPorcentagesDown] = "porcentagesDown"></app-grafico-porcentage-dw><br><br>
 
 </div>

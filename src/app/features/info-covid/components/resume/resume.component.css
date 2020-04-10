@@ -2,6 +2,9 @@ body{
     margin: 5px;
 }
 
+th{
+  font-size: 0.8rem;
+}
 
 .div-table {
     display: table;         
@@ -65,10 +68,45 @@ body{
 .sube {
   color: red; 
   font-size: 20px;
-
 }
 
 .baja{
   color: green; 
   font-size: 20px;
 }
+
+.table-striped{
+  width: 760px;
+}
+
+td {
+  height: 5px;
+}
+
+
+
+.cifras-glob{
+  /* font-size: 1.1rem; */
+  margin:0;
+  
+}
+
+.text-glob{
+  font-size: 1rem;
+}
+
+.card-text{
+  margin-top: -10px;
+}
+/* table.dataTable thead .sorting:after,
+table.dataTable thead .sorting:before,
+table.dataTable thead .sorting_asc:after,
+table.dataTable thead .sorting_asc:before,
+table.dataTable thead .sorting_asc_disabled:after,
+table.dataTable thead .sorting_asc_disabled:before,
+table.dataTable thead .sorting_desc:after,
+table.dataTable thead .sorting_desc:before,
+table.dataTable thead .sorting_desc_disabled:after,
+table.dataTable thead .sorting_desc_disabled:before {
+bottom: .5em;
+} */
