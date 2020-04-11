@@ -28,7 +28,8 @@ RUN npm run build --prod
 
 # stage 2
 FROM nginx:alpine
-RUN apk add --update nodejs nodejs-npm angular
+RUN apk add --update nodejs nodejs-npm
 COPY --from=node /app/dist/${APP} /usr/share/nginx/html
 COPY package* ./
+RUN npm install --production
 CMD ["npm","run", "start:prod"]

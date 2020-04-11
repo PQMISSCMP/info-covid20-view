@@ -14,16 +14,24 @@ export class GraficoPorcentageUpComponent implements OnChanges {
 
   ChartLegend = true;
   ChartPlugins = [];
-  ChartType = 'bar';
+  ChartType = 'line';
 
   labelsPorcentages: any[] = [];
 
   ChartOptions = {
-    responsive: true
+    responsive: true,
+    scales: {
+      xAxes: [{
+        display: true
+      }],
+      yAxes: [{
+        display: true
+      }],
+    }
   };
 
   cPorcentagesPais: any[] = [];
-  ChartDataPorcentages = [{data: []}] as ChartDataSets[];
+  ChartDataPorcentages = [{data: [], fill: false}] as ChartDataSets[];
   ChartLabelsPorcentages: Label[] = [];
 
   constructor() { }
@@ -43,7 +51,7 @@ export class GraficoPorcentageUpComponent implements OnChanges {
         'rgb(50, 61, 100)',
       ],
       borderColor: 'rgba(200, 99, 132, .7)',
-      borderWidth: 1,
+      borderWidth: 2,
     }
   ];
 
