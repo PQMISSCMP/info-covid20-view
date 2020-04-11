@@ -20,18 +20,11 @@ export class GraficoPorcentageUpComponent implements OnChanges {
 
   ChartOptions = {
     responsive: true,
-    scales: {
-      xAxes: [{
-        display: true
-      }],
-      yAxes: [{
-        display: true
-      }],
-    }
+    elements: { line: { fill: false } }
   };
 
   cPorcentagesPais: any[] = [];
-  ChartDataPorcentages = [{data: [], fill: false}] as ChartDataSets[];
+  ChartDataPorcentages = [{data: []}] as ChartDataSets[];
   ChartLabelsPorcentages: Label[] = [];
 
   constructor() { }
@@ -39,19 +32,19 @@ export class GraficoPorcentageUpComponent implements OnChanges {
   chartColorsPorcent: Color[] = [
     {
       backgroundColor: [
-        // 'rgb(50, 241, 100)',
-        // 'rgb(50, 221, 100)',
-        // 'rgb(50, 201, 100)',
-        // 'rgb(50, 181, 100)',
-        // 'rgb(50, 161, 100)',
-        // 'rgb(50, 141, 100)',
-        // 'rgb(50, 121, 100)',
-        // 'rgb(50, 101, 100)',
-        // 'rgb(50, 81, 100)',
-        'rgb(255, 128, 0)',
+        'rgb(50, 241, 100)',
+        'rgb(50, 221, 100)',
+        'rgb(50, 201, 100)',
+        'rgb(50, 181, 100)',
+        'rgb(50, 161, 100)',
+        'rgb(50, 141, 100)',
+        'rgb(50, 121, 100)',
+        'rgb(50, 101, 100)',
+        'rgb(50, 20, 100)',
+        // 'rgb(255, 128, 0)',
         // 'rgba(200, 99, 132, .7)'
       ],
-      borderColor: 'rgba(200, 99, 132, .7)',
+      borderColor: 'rgba(255, 128, 0)',
       borderWidth: 2,
     }
   ];

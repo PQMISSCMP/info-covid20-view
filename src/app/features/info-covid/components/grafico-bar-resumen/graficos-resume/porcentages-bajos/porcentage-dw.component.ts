@@ -14,12 +14,13 @@ export class GraficoPorcentageDownComponent implements OnChanges {
 
   ChartLegend = true;
   ChartPlugins = [];
-  ChartType = 'bar';
+  ChartType = 'line';
 
   labelsPorcentages: any[] = [];
 
   ChartOptions = {
-    responsive: true
+    responsive: true,
+    elements: { line: { fill: false } }
   };
 
   cPorcentagesPais: any[] = [];
@@ -32,18 +33,18 @@ export class GraficoPorcentageDownComponent implements OnChanges {
     {
       backgroundColor: [
         'rgb(80, 241, 180)',
-        'rgb(80, 221, 180)',
-        'rgb(80, 201, 180)',
-        'rgb(80, 181, 180)',
-        'rgb(80, 161, 180)',
-        'rgb(80, 141, 180)',
-        'rgb(80, 121, 180)',
-        'rgb(80, 101, 180)',
-        'rgb(80, 81, 180)',
-        'rgb(80, 61, 180)',
+        // 'rgb(80, 221, 180)',
+        // 'rgb(80, 201, 180)',
+        // 'rgb(80, 181, 180)',
+        // 'rgb(80, 161, 180)',
+        // 'rgb(80, 141, 180)',
+        // 'rgb(80, 121, 180)',
+        // 'rgb(80, 101, 180)',
+        // 'rgb(80, 81, 180)',
+        // 'rgb(80, 61, 180)',
       ],
       borderColor: 'rgba(200, 99, 132, .7)',
-      borderWidth: 1,
+      borderWidth: 2,
     }
   ];
 

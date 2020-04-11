@@ -27,9 +27,9 @@ RUN npm install
 RUN npm run build --prod
 
 # stage 2
-FROM nginx:alpine
+FROM node:latest
 RUN apk add --update nodejs nodejs-npm
 COPY --from=node /app/dist/${APP} /usr/share/nginx/html
-RUN npm i -g @angular/cli
+# RUN npm i -g @angular/cli
 COPY package* ./
 CMD ["npm","run", "start:prod"]
