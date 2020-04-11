@@ -31,7 +31,8 @@ RUN npm run build
 
 # stage 2 
 FROM nginx:1.17.9-alpine
-# RUN sudo apt-get add --update nodejs nodejs-npm
+RUN sudo apt-get add --update nodejs nodejs-npm
+RUN ng update @angular/cli --migrate-only --from=1.7.3
 # COPY --from=node /app/dist/${APP} /usr/share/nginx/html
 COPY --from=node /usr/src/app/dist/${APP} /usr/share/nginx/html
 COPY ./nginx.conf /etc/nginx/conf.d/default.conf
