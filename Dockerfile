@@ -18,7 +18,7 @@
 
 
 # stage 1
-FROM node:8.11.2-alpine as node
+FROM node:lastest as node
 ARG APP=fe-corona
 ENV APP ${APP}
 WORKDIR /usr/src/app
