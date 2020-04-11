@@ -18,18 +18,21 @@
 
 
 # stage 1
-FROM node:latest as node
+FROM node:8.11.2-alpine as node
 ARG APP=fe-corona
 ENV APP ${APP}
-WORKDIR /app
-COPY . .
+WORKDIR /usr/src/app
+COPY package*.json ./
 RUN npm install
-RUN npm run build --prod
+COPY . .
+RUN npm run build
 
 # stage 2
-FROM node:latest
+FROM nginx:1.13.12-alpine
 # RUN sudo apt-get add --update nodejs nodejs-npm
-COPY --from=node /app/dist/${APP} /usr/share/nginx/html
-RUN npm i -g @angular/cli
-COPY package* ./
+# COPY --from=node /app/dist/${APP} /usr/share/nginx/html
+COPY --from=node /usr/src/app/dist/angular-docker /usr/share/nginx/html
+COPY ./nginx.conf /etc/nginx/conf.d/default.conf
+# RUN npm i -g @angular/cli
+# COPY package* ./
 CMD ["npm","run", "start:prod"]
