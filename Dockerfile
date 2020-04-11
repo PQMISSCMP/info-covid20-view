@@ -10,8 +10,7 @@ RUN npm run build
 
 ### STAGE 2: Run ###
 FROM nginx:1.17.1-alpine
-RUN apk update && \
-    apk add --virtual nodejs npm
+RUN apk add npm
 WORKDIR /app
 COPY --from=build /usr/src/app/dist/${APP} .
 CMD ["npm","run", "start:prod"]
