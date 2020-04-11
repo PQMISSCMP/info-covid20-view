@@ -18,7 +18,7 @@
 
 
 # stage 1
-FROM node:10.13-alpine as node
+FROM node:10.16.3-alpine as node
 ARG APP=fe-corona
 ENV APP ${APP}
 WORKDIR /usr/src/app
@@ -30,9 +30,8 @@ RUN npm run build
 # docker pull node:12.16.2-alpine
 
 # stage 2 
-FROM nginx:1.17.9-alpine
+FROM nginx
 RUN apk add nodejs nodejs-npm
-RUN ng update @angular/cli --migrate-only --from=1.7.3
 # COPY --from=node /app/dist/${APP} /usr/share/nginx/html
 COPY --from=node /usr/src/app/dist/${APP} /usr/share/nginx/html
 COPY ./nginx.conf /etc/nginx/conf.d/default.conf
