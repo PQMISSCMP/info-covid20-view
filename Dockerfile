@@ -27,11 +27,13 @@ RUN npm install
 COPY . .
 RUN npm run build
 
+# docker pull node:12.16.2-alpine
+
 # stage 2 
 FROM nginx:1.17.9-alpine
 # RUN sudo apt-get add --update nodejs nodejs-npm
 # COPY --from=node /app/dist/${APP} /usr/share/nginx/html
-COPY --from=node /usr/src/app/dist/angular-docker /usr/share/nginx/html
+COPY --from=node /usr/src/app/dist/${APP} /usr/share/nginx/html
 COPY ./nginx.conf /etc/nginx/conf.d/default.conf
 # RUN npm i -g @angular/cli
 # COPY package* ./
