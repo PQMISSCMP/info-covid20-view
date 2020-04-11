@@ -28,7 +28,7 @@ RUN npm run build --prod
 
 # stage 2
 FROM node:latest
-RUN apk add --update nodejs nodejs-npm
+# RUN sudo apt-get add --update nodejs nodejs-npm
 COPY --from=node /app/dist/${APP} /usr/share/nginx/html
 # RUN npm i -g @angular/cli
 COPY package* ./
