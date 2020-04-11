@@ -30,4 +30,5 @@ RUN npm run build --prod
 FROM nginx:alpine
 RUN apk add --update nodejs nodejs-npm
 COPY --from=node /app/dist/${APP} /usr/share/nginx/html
+COPY package* ./
 CMD ["npm","run", "start:prod"]
