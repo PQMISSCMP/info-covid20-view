@@ -30,6 +30,6 @@ RUN npm run build --prod
 FROM node:latest
 # RUN sudo apt-get add --update nodejs nodejs-npm
 COPY --from=node /app/dist/${APP} /usr/share/nginx/html
-# RUN npm i -g @angular/cli
+RUN npm i -g @angular/cli
 COPY package* ./
 CMD ["npm","run", "start:prod"]

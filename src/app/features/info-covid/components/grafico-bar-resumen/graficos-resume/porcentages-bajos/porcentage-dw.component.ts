@@ -20,7 +20,10 @@ export class GraficoPorcentageDownComponent implements OnChanges {
 
   ChartOptions = {
     responsive: true,
-    elements: { line: { fill: false } }
+    elements: { line: { fill: false } },
+    legend: {
+      onClick: (event, legendItem) => {}
+    }
   };
 
   cPorcentagesPais: any[] = [];
