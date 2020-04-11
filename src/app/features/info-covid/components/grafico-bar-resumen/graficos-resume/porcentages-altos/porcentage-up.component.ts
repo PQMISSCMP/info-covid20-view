@@ -39,16 +39,17 @@ export class GraficoPorcentageUpComponent implements OnChanges {
   chartColorsPorcent: Color[] = [
     {
       backgroundColor: [
-        'rgb(50, 241, 100)',
-        'rgb(50, 221, 100)',
-        'rgb(50, 201, 100)',
-        'rgb(50, 181, 100)',
-        'rgb(50, 161, 100)',
-        'rgb(50, 141, 100)',
-        'rgb(50, 121, 100)',
-        'rgb(50, 101, 100)',
-        'rgb(50, 81, 100)',
-        'rgb(50, 61, 100)',
+        // 'rgb(50, 241, 100)',
+        // 'rgb(50, 221, 100)',
+        // 'rgb(50, 201, 100)',
+        // 'rgb(50, 181, 100)',
+        // 'rgb(50, 161, 100)',
+        // 'rgb(50, 141, 100)',
+        // 'rgb(50, 121, 100)',
+        // 'rgb(50, 101, 100)',
+        // 'rgb(50, 81, 100)',
+        // 'rgb(50, 61, 100)',
+        'rgba(200, 99, 132, .7)'
       ],
       borderColor: 'rgba(200, 99, 132, .7)',
       borderWidth: 2,

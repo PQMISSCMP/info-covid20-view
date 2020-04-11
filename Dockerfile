@@ -22,6 +22,7 @@ FROM node:latest as node
 ARG APP=fe-corona
 ENV APP ${APP}
 WORKDIR /app
+RUN npm i -g @angular/cli
 COPY . .
 RUN npm install
 RUN npm run build --prod
@@ -31,5 +32,4 @@ FROM nginx:alpine
 RUN apk add --update nodejs nodejs-npm
 COPY --from=node /app/dist/${APP} /usr/share/nginx/html
 COPY package* ./
-RUN npm install --production
 CMD ["npm","run", "start:prod"]
