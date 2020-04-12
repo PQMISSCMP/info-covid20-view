@@ -78,7 +78,7 @@ FROM node:13.3.0 AS compile-image
 # RUN npm install -g yarn
 
 WORKDIR /opt/ng
-COPY .npmrc package.json ./
+COPY package.json ./
 # RUN yarn install
 
 ENV PATH="./node_modules/.bin:$PATH" 
