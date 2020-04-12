@@ -58,6 +58,7 @@
 # FROM node:latest as node
 # WORKDIR /app
 # COPY . .
+# RUN npm install -g @angular/cli@latest
 # RUN npm install
 # RUN npm run build --prod
 
@@ -74,18 +75,16 @@
 # FROM nginx:alpine
 # COPY --from=builder /app/dist/* /usr/share/nginx/html/
 
-FROM node:13.3.0 AS compile-image
-# RUN npm install -g yarn
 
-WORKDIR /opt/ng
-COPY package.json ./
-# RUN yarn install
-
-ENV PATH="./node_modules/.bin:$PATH" 
-
-COPY . ./
-RUN ng build --prod
-
-FROM nginx
-COPY docker/nginx/default.conf /etc/nginx/conf.d/default.conf
-COPY --from=compile-image /opt/ng/dist/app-name /usr/share/nginx/html
+# Nodejs Base image
+FROM node
+WORKDIR /app
+ENV PATH /app/node_modules/.bin:$PATH
+# install and app dependencies
+COPY package.json /app/package.json
+RUN npm install
+RUN npm install -g @angular/cli
+# add app
+COPY . /app
+# start app
+CMD ng serve --host 0.0.0.0
