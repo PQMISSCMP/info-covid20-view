@@ -65,11 +65,27 @@
 # FROM nginx:alpine
 # COPY --from=node /app/dist/fe-corona /usr/share/nginx/html
 
-FROM node:alpine AS builder
-WORKDIR /app
-COPY . .
-RUN npm install && \
-    npm run build
+# FROM node:alpine AS builder
+# WORKDIR /app
+# COPY . .
+# RUN npm install && \
+#     npm run build
 
-FROM nginx:alpine
-COPY --from=builder /app/dist/* /usr/share/nginx/html/
+# FROM nginx:alpine
+# COPY --from=builder /app/dist/* /usr/share/nginx/html/
+
+FROM node:13.3.0 AS compile-image
+# RUN npm install -g yarn
+
+WORKDIR /opt/ng
+COPY .npmrc package.json ./
+# RUN yarn install
+
+ENV PATH="./node_modules/.bin:$PATH" 
+
+COPY . ./
+RUN ng build --prod
+
+FROM nginx
+COPY docker/nginx/default.conf /etc/nginx/conf.d/default.conf
+COPY --from=compile-image /opt/ng/dist/app-name /usr/share/nginx/html
