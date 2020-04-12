@@ -55,12 +55,21 @@
 # CMD sed -i -e 's/$PORT/'"$PORT"'/g' /etc/nginx/conf.d/default.conf && nginx -g 'daemon off;'
 
 # stage 1
-FROM node:latest as node
+# FROM node:latest as node
+# WORKDIR /app
+# COPY . .
+# RUN npm install
+# RUN npm run build --prod
+
+# # stage 2
+# FROM nginx:alpine
+# COPY --from=node /app/dist/fe-corona /usr/share/nginx/html
+
+FROM node:alpine AS builder
 WORKDIR /app
 COPY . .
-RUN npm install
-RUN npm run build --prod
+RUN npm install && \
+    npm run build
 
-# stage 2
 FROM nginx:alpine
-COPY --from=node /app/dist/fe-corona /usr/share/nginx/html
+COPY --from=builder /app/dist/* /usr/share/nginx/html/
