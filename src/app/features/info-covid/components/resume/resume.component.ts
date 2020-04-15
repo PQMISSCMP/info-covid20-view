@@ -1,29 +1,8 @@
-import { Component, OnInit, ViewChild, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { CovidService } from '../../services/covid.service';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { CasosResume, State, SearchResult } from '../../model/interfaces';
-
-import {DecimalPipe} from '@angular/common';
-import {QueryList, ViewChildren} from '@angular/core';
-import {Observable, BehaviorSubject, Subject, of} from 'rxjs';
-
-import { CountryService } from '../../services/table.services';
-import {NgbdSortableHeader, SortEvent, SortColumn, SortDirection} from '../../directives/sortable.directive';
-
-
-const compare = (v1: string, v2: string) => v1 < v2 ? -1 : v1 > v2 ? 1 : 0;
-
-function sort(resumes: CasosResume[], column: SortColumn, direction: string): CasosResume[] {
-  if (direction === '' || column === '') {
-    return resumes;
-  } else {
-    return [...resumes].sort((a, b) => {
-      const res = compare(`${a[column]}`, `${b[column]}`);
-      return direction === 'asc' ? res : -res;
-    });
-  }
-}
-
+import { CasosResume, InfoHeader, InputSelectCountry } from '../../model/interfaces';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-resume',
@@ -32,92 +11,20 @@ function sort(resumes: CasosResume[], column: SortColumn, direction: string): Ca
 })
 export class ResumeComponent implements OnInit {
 
-  // get resumes$() { return this._resumes$.asObservable(); }
-  // get total$() { return this._total$.asObservable(); }
-  // get loading$() { return this._loading$.asObservable(); }
-  // get page() { return this.state.page; }
-  // get pageSize() { return this.state.pageSize; }
-  // get searchTerm() { return this.state.searchTerm; }
-  
-  // // tslint:disable-next-line: adjacent-overload-signatures
-  // set page(page: number) { this._set({page}); }
-  // // tslint:disable-next-line: adjacent-overload-signatures
-  // set pageSize(pageSize: number) { this._set({pageSize}); }
-  // // tslint:disable-next-line: adjacent-overload-signatures
-  // set searchTerm(searchTerm: string) { this._set({searchTerm}); }
-  set sortColumn(sortColumn: SortColumn) { this._set({sortColumn}); }
-  set sortDirection(sortDirection: SortDirection) { this._set({sortDirection}); }
-
-
-  private estado: State = {
-    sortColumn: '',
-    sortDirection: ''
-  };
-
-  constructor(private covidService: CovidService, private spinner: NgxSpinnerService, public service: CountryService) {}
-  public totContMundo: number;
-  public totDecMundo: number;
-
-  // private _loading$ = new BehaviorSubject<boolean>(true);
-  private _search$ = new Subject<void>();
-  // private _resumes$ = new BehaviorSubject<CasosResume[]>([]);
-  // private _total$ = new BehaviorSubject<number>(0);
-
-
-  private state: State = {
-    page: 1,
-    pageSize: 4,
-    searchTerm: '',
-    sortColumn: '',
-    sortDirection: ''
-  };
-
-  // resumes$: Observable<CasosResume[]>;
-  // totalResumes$: Observable<number>;
-
-  // tslint:disable-next-line: member-ordering
-  @ViewChildren(NgbdSortableHeader) headers: QueryList<NgbdSortableHeader>;
-  // tslint:disable-next-line: member-ordering
-  @Output() propagar = new EventEmitter<CasosResume[]>();
-
+  public dataInputHeader: InfoHeader;
+  public countrySelted: boolean;
+  public inputCountry = {} as InputSelectCountry;
   actualizacionesResume: CasosResume[] = [];
+  actualizacionesResumeBck: CasosResume[] = [];
+  @Output() proveerGraficos = new EventEmitter<CasosResume[]>();
 
-  private _set(patch: Partial<State>) {
-    Object.assign(this.state, patch);
-    this._search$.next();
-  }
-
-  onSort({column, direction}: SortEvent) {
-    console.log({column, direction});
-
-    this.headers.forEach(header => {
-      if (header.sortable !== column) {
-        header.direction = '';
-      }
-    });
-    this.sortColumn = column;
-    this.sortDirection = direction;
-  }
-
-  private _search(): Observable<any> {
-    const {sortColumn, sortDirection} = this.estado;
-
-    // 1. sort
-    const countries = sort([], sortColumn, sortDirection);
-
-    return of(countries);
-  }
+  constructor(public covidService: CovidService, private spinner: NgxSpinnerService) { }
 
   async ngOnInit() {
 
     try {
-
       setTimeout(_ => { this.spinner.show(); }, 10);
-
       const list = await this.covidService.getHistoryList();
-      this.totContMundo = list.reduce((acc, val) => acc + val.totalContagiados , 0);
-      this.totDecMundo = list.reduce((acc, val) => acc + val.totalDecesos , 0);
-
 
       if (typeof list === 'undefined') { throw new Error('Error al obtener los datos'); }
       list.map(x => {
@@ -141,50 +48,99 @@ export class ResumeComponent implements OnInit {
         this.actualizacionesResume.push(item);
       });
 
-
       this.actualizacionesResume = this.actualizacionesResume.sort((a, b) => b.totalContagiados - a.totalContagiados);
+      this.actualizacionesResumeBck = this.actualizacionesResume;
 
-      // const paisesSudamerica = ['Chile', 'Ecuador', 'Bolivia', 'Brazil', 'Argentina'	, 'Colombia', 'Uruguay', 'Peru', 'Paraguay', 'Venezuela'];
-      // const sudamerica = this.actualizacionesResume.filter(filtro => paisesSudamerica.find(x => x === filtro.lugar) );
+      // const dead = list.reduce((acc, val) => acc + val.totalDecesos , 0);
+      // const contg = list.reduce((acc, val) => acc + val.totalContagiados , 0);
+      // const perc = ((dead / contg) * 100).toFixed(1);
 
-      // console.log(sudamerica);
-      // console.log(sudamerica.reduce((a, v) => a + v.totalContagiados, 0));
-      // console.log(sudamerica.reduce((a, v) => a + v.totalDecesos, 0));
+      // const dataInp: InfoHeader =  {
+      //   totalDead: dead,
+      //   totalInfected: contg,
+      //   percentage: perc,
+      //   relation: (contg / dead),
+      //   titulo: 'Information of the COVID-19 virus in the world'
+      // };
+      this.dataInputHeader = this.getInfoHeader(list, 'Information of the COVID-19 virus in the world');
 
+      this.covidService.country.subscribe(data => {
+        this.countrySelted = data.flagSelected;
+        console.log('suscribe data: ', data);
+        // if (!data.flagSelected) {
+        // this.cargaInfoCountry(data.country);
+        // }
+
+      });
 
       setTimeout(_ => { this.spinner.hide(); }, 10);
-
-      this.onPropagar();
-
+      this.onProveerGraficos();
     } catch (error) {
       console.log(error);
       alert(error.message);
     }
   }
 
-  onPropagar() {
-    this.propagar.emit(this.actualizacionesResume);
+  onProveerGraficos() {
+    this.proveerGraficos.emit(this.actualizacionesResume);
   }
 
-  callChart(pais: string) {
-    console.log(pais);
+  getInfoHeader(lista: CasosResume[], titulo: string): InfoHeader {
+    const dead = lista.reduce((acc, val) => acc + val.totalDecesos , 0);
+    const contg = lista.reduce((acc, val) => acc + val.totalContagiados , 0);
+    const perc = ((dead / contg) * 100).toFixed(1);
+    return {
+      totalDead: dead,
+      totalInfected: contg,
+      percentage: perc,
+      relation: (contg / dead),
+      titulo
+    } as InfoHeader;
   }
 
-  // private _search(): Observable<SearchResult> {
-  //   const {sortColumn, sortDirection, pageSize, page, searchTerm} = this.state;
+  cargaInfoCountry(dataOutput: string) {
+    console.log("dataOutput: ", dataOutput);
 
-  //   // 1. sort
-  //   let resumes = sort(this.resumes, sortColumn, sortDirection);
+    if (dataOutput === '/') {
+      this.actualizacionesResume = this.actualizacionesResumeBck;
+      this.dataInputHeader = this.getInfoHeader(this.actualizacionesResumeBck, 'Information of the COVID-19 virus in the world');
+      return;
+    } else {
+      this.dataInputHeader = this.getInfoHeader(this.actualizacionesResumeBck, dataOutput);
+      this.covidService.updatedCountrySelection({flagSelected: true});
 
-  //   // 2. filter
-  //   resumes = resumes.filter(country => matches(country, searchTerm, this.pipe));
-  //   const total = resumes.length;
+      const { sudamerica } = this.covidService;
+      const percentages = this.actualizacionesResume.find(pais => pais.lugar.replace(/ /g, '') === dataOutput).percentages;
+      const resumeRegion = this.actualizacionesResume.filter(el => sudamerica.includes(el.lugar));
 
-  //   // 3. paginate
-  //   resumes = resumes.slice((page - 1) * pageSize, (page - 1) * pageSize + pageSize);
-  //   // return of({countries: resumes, total});
-  //   return;
-  // }
+      this.actualizacionesResume = resumeRegion;
 
+      this.inputCountry = {
+        dataSubRegion: resumeRegion,
+        percentages
+      };
+
+
+    }
+
+    this.onProveerGraficos();
+    // if (typeof dataOutput !== 'undefined') {
+    // }
+
+    // const contg = this.actualizacionesResume.find(pais => pais.lugar.replace(/ /g, '') === dataOutput).totalContagiados;
+    // const deads = this.actualizacionesResume.find(pais => pais.lugar.replace(/ /g, '') === dataOutput).totalDecesos;
+    // const perc = ((deads / contg) * 100).toFixed(1);
+
+    // const dataInp: InfoHeader = {
+    //   totalInfected: contg,
+    //   totalDead: deads,
+    //   percentage: perc,
+    //   relation: Math.floor(contg / deads),
+    //   titulo: dataOutput
+    // };
+    // this.dataInput = dataInp;
+
+
+  }
 
 }

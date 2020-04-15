@@ -11,21 +11,24 @@ import { CountryService } from './features/info-covid/services/table.services';
 
 import { AppComponent } from './app.component';
 import { GlobalMapComponent } from './features/info-covid/components/global-map/global-map.component';
-import { GraficoLinealComponent } from './features/info-covid/components/grafico-lineal/grafico-lineal.component';
 import { ResumeComponent } from './features/info-covid/components/resume/resume.component';
-import { GraficoBarResumeComponent } from './features/info-covid/components/grafico-bar-resumen/grafico-bar-resume.component';
+import { GraficoBarResumeComponent } from './features/info-covid/components/grafico-resumen/grafico-bar-resume.component';
 import { DecimalPipe } from '@angular/common';
 import { NgbdSortableHeader } from './features/info-covid/directives/sortable.directive';
-import { GraficoContagiadosComponent } from './features/info-covid/components/grafico-bar-resumen/graficos-resume/contagiados/contagiados.component';
-import { GraficoDecesosComponent } from './features/info-covid/components/grafico-bar-resumen/graficos-resume/decesos/decesos.component';
-import { GraficoPorcentageUpComponent } from './features/info-covid/components/grafico-bar-resumen/graficos-resume/porcentages-altos/porcentage-up.component';
-import { GraficoPorcentageDownComponent } from './features/info-covid/components/grafico-bar-resumen/graficos-resume/porcentages-bajos/porcentage-dw.component';
+
+import { InfoHeaderComponent } from './features/info-covid/components/info-header/info-header.component';
+import { TableResumeComponent } from './features/info-covid/components/table-resume/table-resume.component';
+import { InfoCountryComponent } from './features/info-covid/components/info-country/info-country.component';
+import { CountryPercentagesComponent } from './features/info-covid/components/info-country/graficos/porcentages/porcentages.component';
+import { GraficoContagiadosComponent } from './features/info-covid/components/grafico-resumen/graficos/contagiados/contagiados.component';
+import { GraficoPorcentageDownComponent } from './features/info-covid/components/grafico-resumen/graficos/porcentages-bajos/porcentage-dw.component';
+import { GraficoDecesosComponent } from './features/info-covid/components/grafico-resumen/graficos/decesos/decesos.component';
+import { GraficoPorcentageUpComponent } from './features/info-covid/components/grafico-resumen/graficos/porcentages-altos/porcentage-up.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    GraficoLinealComponent,
     GlobalMapComponent,
     ResumeComponent,
     GraficoBarResumeComponent,
@@ -33,7 +36,11 @@ import { GraficoPorcentageDownComponent } from './features/info-covid/components
     GraficoContagiadosComponent,
     GraficoDecesosComponent,
     GraficoPorcentageUpComponent,
-    GraficoPorcentageDownComponent
+    GraficoPorcentageDownComponent,
+    InfoHeaderComponent,
+    TableResumeComponent,
+    InfoCountryComponent,
+    CountryPercentagesComponent
   ],
   imports: [
     BrowserModule,

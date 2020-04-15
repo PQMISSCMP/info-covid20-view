@@ -1,11 +1,11 @@
 
 <div class="container">
-    <div style="width: auto;">
-        <app-resume (propagar)="procesaPropagar($event)"></app-resume>
+    <div style="width: 760px;">
+        <app-resume (proveerGraficos)="onProveerGraficos($event)"></app-resume>
     </div>
     
     <div style="margin-left: 30px; width: 0%;">
         <!-- <router-outlet></router-outlet> -->
         <app-grafico-bar-resume [dataResume] = "dataResume"></app-grafico-bar-resume>
     </div>
-</div>  
+</div>

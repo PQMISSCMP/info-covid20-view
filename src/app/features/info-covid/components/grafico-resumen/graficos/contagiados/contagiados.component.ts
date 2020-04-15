@@ -51,10 +51,14 @@ export class GraficoContagiadosComponent implements OnChanges {
 
     if (typeof this.dataContagiados !== 'undefined') {
 
+        this.cContagiadosPais = [];
+        this.labelsPaisContagiados = [];
+
         this.spinner.show();
         const Contagiados = this.dataContagiados.sort((a, b) => b.totalContagiados - a.totalContagiados).slice(0, 10);
 
         Contagiados.reverse();
+
         Contagiados.map(report => {
           this.cContagiadosPais.push(report.totalContagiados);
           this.labelsPaisContagiados.push(report.lugar);

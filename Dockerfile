@@ -1,19 +1,18 @@
-# ### STAGE 1: Build ###
-# FROM node:12.7-alpine AS build
-# ARG APP=fe-corona
-# ENV APP ${APP}
-# WORKDIR /usr/src/app
-# COPY package.json ./
-# RUN npm install
-# COPY . .
-# RUN npm run build
+### STAGE 1: Build ###
+FROM node:12.7-alpine AS build
+ARG APP=fe-corona
+ENV APP ${APP}
+WORKDIR /usr/src/app
+COPY package.json ./
+RUN npm install
+COPY . .
+RUN npm run build
 
-# ### STAGE 2: Run ###
-# FROM nginx:1.17.1-alpine
-# RUN apk add --update nodejs nodejs-npm
-# WORKDIR /app
-# COPY --from=build /usr/src/app/dist/${APP} .
-# CMD ["npm","run", "start:prod"]
+### STAGE 2: Run ###
+FROM nginx:1.17.1-alpine
+RUN apk add --update nodejs nodejs-npm
+WORKDIR /app
+COPY --from=build /usr/src/app/dist/${APP} .
 
 
 
@@ -76,16 +75,13 @@
 # COPY --from=builder /app/dist/* /usr/share/nginx/html/
 
 
-# Nodejs Base image
-FROM node
-WORKDIR /app
-ENV PATH /app/node_modules/.bin:$PATH
-# install and app dependencies
-COPY package.json /app/package.json
-RUN npm install
-RUN npm install -g @angular/cli
-# add app
-COPY . /app
-# start app
-# CMD ng serve --host 0.0.0.0
-CMD ng serve
+# # Nodejs Base image
+# FROM node
+# WORKDIR /app
+# ENV PATH /app/node_modules/.bin:$PATH
+# # install and app dependencies
+# COPY package.json /app/package.json
+# RUN npm install
+# RUN npm install -g @angular/cli
+# # add app
+# COPY . /app

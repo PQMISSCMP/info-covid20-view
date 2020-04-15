@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { CasosResume } from './features/info-covid/model/interfaces';
 
 @Component({
   selector: 'app-root',
@@ -6,11 +7,12 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'fe-corona';
+  title = 'Covid 20 - view';
 
-  dataResume: any;
+  dataResume: CasosResume[];
   constructor() { }
-  procesaPropagar(event) {
+
+  onProveerGraficos(event) {
     this.dataResume = event;
   }
 

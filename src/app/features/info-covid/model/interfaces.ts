@@ -45,6 +45,27 @@ export interface State {
 }
 
 export interface PercentageModel {
-    percent: string;
+    percent: number;
     Fecha: Date;
+}
+
+
+export interface InfoHeader {
+    totalInfected: number;
+    totalDead: number;
+    percentage: string;
+    relation: number;
+    titulo: string;
+}
+
+
+export interface InputSelectCountry {
+    percentages: PercentageModel[];
+    dataSubRegion: CasosResume[];
+}
+
+
+export interface SelectCountry {
+    flagSelected: boolean;
+    country?: string;
 }
