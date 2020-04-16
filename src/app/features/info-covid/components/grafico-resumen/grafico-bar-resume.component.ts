@@ -22,7 +22,6 @@ export class GraficoBarResumeComponent implements OnChanges {
       this.decesos = this.dataResume.sort((a, b) => b.totalDecesos - a.totalDecesos).slice(0, 10);
       this.porcentagesUp = this.dataResume.filter(x => x.totalContagiados > 10000).sort((a, b) => b.porcent - a.porcent).slice(0, 10).reverse();
       this.porcentagesDown = this.dataResume.filter(x => x.totalContagiados > 10000).sort((a, b) => a.porcent - b.porcent).slice(0, 10).reverse();
-    console.log(this.porcentagesUp);
     
     }
 

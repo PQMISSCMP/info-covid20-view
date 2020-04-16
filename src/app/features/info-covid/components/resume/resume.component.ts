@@ -69,7 +69,7 @@ export class ResumeComponent implements OnInit {
         console.log('suscribe data: ', data);
         // if (!data.flagSelected) {
         // this.cargaInfoCountry(data.country);
-        // }
+        //}
 
       });
 
@@ -107,7 +107,7 @@ export class ResumeComponent implements OnInit {
       return;
     } else {
       this.dataInputHeader = this.getInfoHeader(this.actualizacionesResumeBck, dataOutput);
-      this.covidService.updatedCountrySelection({flagSelected: true});
+      this.covidService.updatedCountrySelection({flagSelected: true, country: dataOutput});
 
       const { sudamerica } = this.covidService;
       const percentages = this.actualizacionesResume.find(pais => pais.lugar.replace(/ /g, '') === dataOutput).percentages;

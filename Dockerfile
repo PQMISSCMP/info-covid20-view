@@ -26,13 +26,10 @@ RUN npm install
 COPY . .
 RUN npm run build
 
-# docker pull node:12.16.2-alpine
 
 # stage 2 
 FROM nginx
-EXPOSE 80
-# RUN apk add nodejs npm nodejs-npm
-# COPY --from=node /app/dist/${APP} /usr/share/nginx/html
+# EXPOSE 80
 COPY --from=node /usr/src/app/dist/${APP} /usr/share/nginx/html
 COPY ./nginx.conf /etc/nginx/conf.d/default.conf
 CMD sed -i -e 's/$PORT/'"$PORT"'/g' /etc/nginx/conf.d/default.conf && nginx -g 'daemon off;'

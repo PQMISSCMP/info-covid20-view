@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import request from 'axios';
 import { CasosResume, SelectCountry } from '../model/interfaces';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +13,8 @@ export class CovidService {
   // public countrySelected: boolean;
 
 
-  private dataSource = new BehaviorSubject<SelectCountry>({country: '/', flagSelected: false});
+  // private dataSource = new BehaviorSubject<SelectCountry>({country: '/', flagSelected: false});
+  private dataSource = new Subject<SelectCountry>();
   country = this.dataSource.asObservable();
 
   updatedCountrySelection(data: SelectCountry) {
