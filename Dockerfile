@@ -30,7 +30,7 @@ RUN npm run build
 
 # stage 2 
 FROM nginx
-RUN apk add nodejs npm nodejs-npm
+# RUN apk add nodejs npm nodejs-npm
 # COPY --from=node /app/dist/${APP} /usr/share/nginx/html
 COPY --from=node /usr/src/app/dist/${APP} /usr/share/nginx/html
 COPY ./nginx.conf /etc/nginx/conf.d/default.conf
