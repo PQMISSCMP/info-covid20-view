@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import request from 'axios';
-import { CasosResume } from '../model/interfaces';
+import { CasosResume, SelectCountry } from '../model/interfaces';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -8,6 +9,17 @@ import { CasosResume } from '../model/interfaces';
 export class CovidService {
 
   URL_API = 'https://api-coronatracing.herokuapp.com';
+  sudamerica = ['Chile', 'Ecuador', 'Bolivia', 'Brazil', 'Argentina', 'Colombia', 'Uruguay', 'Peru', 'Paraguay', 'Venezuela', 'Guyana', 'Suriname', 'Trinidad and Tobago'];
+  // public countrySelected: boolean;
+
+
+  private dataSource = new BehaviorSubject<SelectCountry>({country: '/', flagSelected: false});
+  country = this.dataSource.asObservable();
+
+  updatedCountrySelection(data: SelectCountry) {
+    this.dataSource.next(data);
+  }
+
 
   async getHistoryByCountry(country: string): Promise <CasosResume[]> {
     const result: CasosResume[] = await (await request.get(`${this.URL_API}/cases/${country}`)).data;

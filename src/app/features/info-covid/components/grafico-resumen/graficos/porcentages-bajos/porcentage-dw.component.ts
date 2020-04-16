@@ -54,19 +54,21 @@ export class GraficoPorcentageDownComponent implements OnChanges {
 
   ngOnChanges() {
 
-    if (typeof this.dataPorcentagesDown !== 'undefined') {
+      if (this.dataPorcentagesDown) {
 
-        const Porcentages = this.dataPorcentagesDown.sort((a, b) => a.porcent - b.porcent).slice(0, 8);
-        Porcentages.reverse();
-        Porcentages.map(report => {
-          this.cPorcentagesPais.push(report.porcent);
-          this.labelsPorcentages.push(report.lugar);
-        });
+          this.ChartDataPorcentagesDow = [];
+          this.labelsPorcentages = [];
+          this.cPorcentagesPais = [];
 
-        this.ChartDataPorcentagesDow = [{ data: this.cPorcentagesPais, label: 'Best % over 10,000 confirmed', barPercentage: 0.5}];
-        this.ChartLabelsPorcentagesDow = this.labelsPorcentages;
+          const Porcentages = this.dataPorcentagesDown;
 
-    }
+          this.cPorcentagesPais = Porcentages.map(({porcent}) => porcent);
+          this.labelsPorcentages = Porcentages.map(({lugar}) => lugar);
+
+          this.ChartDataPorcentagesDow = [{ data: this.cPorcentagesPais, label: 'Best % over 10,000 confirmed', barPercentage: 0.5}];
+          this.ChartLabelsPorcentagesDow = this.labelsPorcentages;
+
+      }
 
   }
 

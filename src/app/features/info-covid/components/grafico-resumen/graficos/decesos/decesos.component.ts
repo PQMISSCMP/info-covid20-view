@@ -52,6 +52,10 @@ export class GraficoDecesosComponent implements OnChanges {
     if (typeof this.dataDecesos !== 'undefined') {
         const Decesos = this.dataDecesos.sort((a, b) => b.totalDecesos - a.totalDecesos).slice(0, 10);
 
+        this.labelsPaisDecesos = [];
+        this.ChartDataDecesos = [];
+        this.cDecesosPais = [];
+
         Decesos.reverse();
         Decesos.map(report => {
           this.cDecesosPais.push(report.totalDecesos);

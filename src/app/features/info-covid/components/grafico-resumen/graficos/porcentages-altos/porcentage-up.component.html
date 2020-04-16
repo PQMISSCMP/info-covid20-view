@@ -1,8 +1,6 @@
 
 <div class="chart-wrapper" *ngIf="cPorcentagesPais.length > 0">
   
-
-  <!-- <span style="color: lightslategray; margin-left: 50px;">Porcentaje más altos de muertes por contagiados </span> -->
   <canvas baseChart 
       [datasets]="ChartDataPorcentages" 
       [labels]="ChartLabelsPorcentages" 
@@ -12,7 +10,5 @@
       [chartType]="ChartType" 
       [plugins]="ChartPlugins">
   </canvas>
-
-  
 
 </div>

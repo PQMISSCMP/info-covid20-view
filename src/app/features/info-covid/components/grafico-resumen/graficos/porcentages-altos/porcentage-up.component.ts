@@ -16,7 +16,7 @@ export class GraficoPorcentageUpComponent implements OnChanges {
   ChartPlugins = [];
   ChartType = 'line';
 
-  labelsPorcentages: any[] = [];
+  labelsPorcentages: string[] = [];
 
   ChartOptions = {
     responsive: true,
@@ -26,7 +26,7 @@ export class GraficoPorcentageUpComponent implements OnChanges {
     }
   };
 
-  cPorcentagesPais: any[] = [];
+  cPorcentagesPais: number[] = [];
   ChartDataPorcentages = [{data: []}] as ChartDataSets[];
   ChartLabelsPorcentages: Label[] = [];
 
@@ -34,19 +34,7 @@ export class GraficoPorcentageUpComponent implements OnChanges {
 
   chartColorsPorcent: Color[] = [
     {
-      backgroundColor: [
-        'rgb(50, 241, 100)',
-        'rgb(50, 221, 100)',
-        'rgb(50, 201, 100)',
-        'rgb(50, 181, 100)',
-        'rgb(50, 161, 100)',
-        'rgb(50, 141, 100)',
-        'rgb(50, 121, 100)',
-        'rgb(50, 101, 100)',
-        'rgb(50, 20, 100)',
-        // 'rgb(255, 128, 0)',
-        // 'rgba(200, 99, 132, .7)'
-      ],
+      backgroundColor: ['rgb(255, 128, 0)'],
       borderColor: 'rgba(255, 128, 0)',
       borderWidth: 2,
     }
@@ -55,16 +43,17 @@ export class GraficoPorcentageUpComponent implements OnChanges {
 
   ngOnChanges() {
 
-    // sort((a, b) => b.porcent - a.porcent).slice(0, 10)
-
     if (typeof this.dataPorcentagesUp !== 'undefined') {
-        const Porcentages = this.dataPorcentagesUp.sort((a, b) => b.porcent - a.porcent).slice(0, 8);
+        // console.log(this.dataPorcentagesUp);
 
-        Porcentages.reverse();
-        Porcentages.map(report => {
-          this.cPorcentagesPais.push(report.porcent);
-          this.labelsPorcentages.push(report.lugar);
-        });
+        this.cPorcentagesPais = [];
+        this.labelsPorcentages = [];
+        this.ChartDataPorcentages = [];
+
+        const Porcentages = this.dataPorcentagesUp;
+        this.cPorcentagesPais = Porcentages.map(({porcent}) => porcent);
+        this.labelsPorcentages = Porcentages.map(({lugar}) => lugar);
+
         this.ChartDataPorcentages = [{ data: this.cPorcentagesPais, label: 'Worst % over 10,000 confirmed', barPercentage: 0.5}];
         this.ChartLabelsPorcentages = this.labelsPorcentages;
 

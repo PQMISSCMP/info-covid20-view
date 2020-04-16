@@ -1,0 +1,17 @@
+.cifras-glob{
+    margin:0;    
+}
+
+.text-glob{
+    font-size: 1rem;
+}
+
+p{
+    margin-top: 15px;
+    margin-bottom: 5px;
+}
+
+.info-header{
+    width: 100%;
+    /* height: 60px; */
+}
