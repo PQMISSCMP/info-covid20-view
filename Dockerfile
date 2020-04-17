@@ -35,26 +35,20 @@
 # CMD sed -i -e 's/$PORT/'"$PORT"'/g' /etc/nginx/conf.d/default.conf && nginx -g 'daemon off;'
     
 # Primer paso, "build-stage", compilando el front-end
-FROM nginx:alpine
-COPY nginx/default.conf /etc/nginx/nginx.conf
-WORKDIR /usr/share/nginx/html
+FROM node:8.9.1-alpine as node
+WORKDIR /usr/src/app
+COPY package*.json ./
+RUN npm install
+COPY . .
 RUN npm run build
-COPY dist/fe-corona . 
+
+# Stage 2
+FROM nginx:1.13.12-alpine
+COPY --from=node /usr/src/app/dist /usr/share/nginx/html
+COPY ./nginx.conf /etc/nginx/conf.d/default.conf
+CMD sed -i -e 's/$PORT/'"$PORT"'/g' /etc/nginx/conf.d/default.conf && nginx -g 'daemon off;'
 
 
-
-# FROM node:8.9.1-alpine as node
-# WORKDIR /usr/src/app
-# COPY package*.json ./
-# RUN npm install
-# COPY . .
-# RUN npm run build
-
-# # Stage 2
-# FROM nginx:1.13.12-alpine
-# COPY --from=node /usr/src/app/dist /usr/share/nginx/html
-# COPY ./nginx.conf /etc/nginx/conf.d/default.conf
-# CMD sed -i -e 's/$PORT/'"$PORT"'/g' /etc/nginx/conf.d/default.conf && nginx -g 'daemon off;'
 
 # stage 1
 # FROM node:latest as node
