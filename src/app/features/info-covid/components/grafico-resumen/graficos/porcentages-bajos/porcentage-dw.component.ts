@@ -65,7 +65,7 @@ export class GraficoPorcentageDownComponent implements OnChanges {
           this.cPorcentagesPais = Porcentages.map(({porcent}) => porcent);
           this.labelsPorcentages = Porcentages.map(({lugar}) => lugar);
 
-          this.ChartDataPorcentagesDow = [{ data: this.cPorcentagesPais, label: 'Best % over 10,000 confirmed', barPercentage: 0.5}];
+          this.ChartDataPorcentagesDow = [{ data: this.cPorcentagesPais, label: 'Best % over threshold confirmed', barPercentage: 0.5}];
           this.ChartLabelsPorcentagesDow = this.labelsPorcentages;
 
       }

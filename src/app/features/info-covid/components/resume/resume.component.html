@@ -1,9 +1,16 @@
-<ngx-spinner></ngx-spinner>
+<ngx-spinner bdColor = "rgba(235,243,246,0.8)" color = "#4851bf" type = "ball-atom" size = "default" ></ngx-spinner>
   
 <div *ngIf="actualizacionesResume.length > 0">
 
   <app-info-header [input]="dataInputHeader"></app-info-header>
-  <app-table-resume *ngIf="!countrySelted" (clickPais)="cargaInfoCountry($event)" [actualizacionesResume] = "actualizacionesResume"></app-table-resume>
+  <app-table-resume *ngIf="!countrySelted"  [actualizacionesResume] = "actualizacionesResume"></app-table-resume>
   <app-info-country *ngIf="countrySelted" [inputCountry]="inputCountry" ></app-info-country>
 
 </div>
+
+<!-- <mat-progress-spinner
+  class="example-margin"
+  [color]="color"
+  [mode]="mode"
+  [value]="value">
+</mat-progress-spinner> -->

@@ -62,10 +62,17 @@ export interface InfoHeader {
 export interface InputSelectCountry {
     percentages: PercentageModel[];
     dataSubRegion: CasosResume[];
+    curvaContagios: number[];
 }
 
 
 export interface SelectCountry {
     flagSelected: boolean;
     country?: string;
+}
+
+
+export interface CurvaContagiados {
+    lugar: string;
+    valores: number[];
 }

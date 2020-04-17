@@ -5,6 +5,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ChartsModule } from 'ng2-charts';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+// import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+
 
 import { CovidService } from './features/info-covid/services/covid.service';
 import { CountryService } from './features/info-covid/services/table.services';
@@ -24,6 +26,7 @@ import { GraficoContagiadosComponent } from './features/info-covid/components/gr
 import { GraficoPorcentageDownComponent } from './features/info-covid/components/grafico-resumen/graficos/porcentages-bajos/porcentage-dw.component';
 import { GraficoDecesosComponent } from './features/info-covid/components/grafico-resumen/graficos/decesos/decesos.component';
 import { GraficoPorcentageUpComponent } from './features/info-covid/components/grafico-resumen/graficos/porcentages-altos/porcentage-up.component';
+import { CurvaContagiosComponent } from './features/info-covid/components/info-country/graficos/curva-contagios/curva-contagios.component';
 
 
 @NgModule({
@@ -40,7 +43,8 @@ import { GraficoPorcentageUpComponent } from './features/info-covid/components/g
     InfoHeaderComponent,
     TableResumeComponent,
     InfoCountryComponent,
-    CountryPercentagesComponent
+    CountryPercentagesComponent,
+    CurvaContagiosComponent
   ],
   imports: [
     BrowserModule,
@@ -49,6 +53,7 @@ import { GraficoPorcentageUpComponent } from './features/info-covid/components/g
     ChartsModule,
     NgxSpinnerModule,
     NgbModule,
+    // MatProgressSpinnerModule
     // ChartModule
   ],
   providers: [CovidService, CountryService, DecimalPipe],

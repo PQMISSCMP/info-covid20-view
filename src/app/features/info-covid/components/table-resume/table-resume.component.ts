@@ -19,10 +19,8 @@ export class TableResumeComponent {
     router.events.subscribe(evento => {
       if (evento instanceof NavigationEnd) {
         window.scroll(0, 0);
-        const stringSent = evento.url === '/' ? '/' : evento.url.split('/')[2].replace(/%20/g, '').trim();
-        // console.log(stringSent);
-        this.covidService.updatedCountrySelection({flagSelected: false, country: stringSent});
-        this.onClickPais(stringSent);
+        const stringSent = evento.url === '/' ? '/' : evento.url.split('/')[2].replace(/%20/g, ' ').trim();
+        this.covidService.updatedCountrySelection({flagSelected: stringSent === '/' ?  false : true, country: stringSent});
       }
 
     });
