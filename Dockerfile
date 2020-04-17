@@ -16,24 +16,31 @@
 
 
 
-# stage 1
-FROM node:10.16.3-alpine as node
-ARG APP=corona
-ENV APP ${APP}
-WORKDIR /usr/src/app
-COPY package*.json ./
-RUN npm install
-COPY . .
-RUN npm run build
+# # stage 1
+# FROM node:10.16.3-alpine as node
+# ARG APP=corona
+# ENV APP ${APP}
+# WORKDIR /usr/src/app
+# COPY package*.json ./
+# RUN npm install
+# COPY . .
+# RUN npm run build
 
 
-# stage 2 
-FROM nginx
-EXPOSE 4200:80
-COPY --from=node /usr/src/app/dist/${APP} /usr/share/nginx/html
-COPY ./nginx.conf /etc/nginx/conf.d/default.conf
-CMD sed -i -e 's/$PORT/'"$PORT"'/g' /etc/nginx/conf.d/default.conf && nginx -g 'daemon off;'
+# # stage 2 
+# FROM nginx
+# EXPOSE 4200:80
+# COPY --from=node /usr/src/app/dist/${APP} /usr/share/nginx/html
+# COPY ./nginx.conf /etc/nginx/conf.d/default.conf
+# CMD sed -i -e 's/$PORT/'"$PORT"'/g' /etc/nginx/conf.d/default.conf && nginx -g 'daemon off;'
     
+# Primer paso, "build-stage", compilando el front-end
+FROM nginx:alpine
+COPY nginx/default.conf /etc/nginx/nginx.conf
+WORKDIR /usr/share/nginx/html
+RUN npm run build
+COPY dist/fe-corona . 
+
 
 
 # FROM node:8.9.1-alpine as node
