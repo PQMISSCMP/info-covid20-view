@@ -29,7 +29,7 @@ RUN npm run build
 
 # stage 2 
 FROM nginx
-EXPOSE 80:4200
+EXPOSE 4200:80
 COPY --from=node /usr/src/app/dist/${APP} /usr/share/nginx/html
 COPY ./nginx.conf /etc/nginx/conf.d/default.conf
 CMD sed -i -e 's/$PORT/'"$PORT"'/g' /etc/nginx/conf.d/default.conf && nginx -g 'daemon off;'
