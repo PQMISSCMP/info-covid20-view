@@ -12,7 +12,7 @@
 
 <span class="glosa-header" *ngIf = "this.covid.TITULO_DEFAULT !== input.titulo"> 
 <b>{{ input.titulo }}</b>,  tiene un total de <b>{{ input.totalInfected | number:'1.0-0' }}</b>  
-casos confirmados, de estos, <b>{{ input.totalDead | number:'1.0-0' }}</b> han perecido dando una tasa de mortalidad del 
+casos confirmados, de estos <b>{{ input.totalDead | number:'1.0-0' }}</b> han perecido dando una tasa de mortalidad del 
 <b>{{ input.percentage.replace('.', ',') }} % </b>(porciento) y una relación de <b>1</b> persona fallecida por <b>{{ input.relation  | number:'1.0-0' }}</b> contagiadas.
 </span>
 
