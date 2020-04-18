@@ -30,11 +30,11 @@ RUN npm run build
 # stage 2 
 FROM nginx
 ENV PORT=80
+RUN rm -rf /usr/share/nginx/html/*
 COPY --from=node /usr/src/app/dist/${APP} /usr/share/nginx/html
 COPY ./nginx.conf /etc/nginx/nginx.conf
 CMD sed -i -e 's/$PORT/'"$PORT"'/g' /etc/nginx/nginx.conf && nginx -g 'daemon off;'
-    
-# COPY ./nginx.conf /etc/nginx/nginx.conf
+
 
 
 

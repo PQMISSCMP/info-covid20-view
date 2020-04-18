@@ -9,4 +9,5 @@
     <h1 class="cifras-glob" style="margin-left: 1.5rem;"><span class="badge badge-secondary">{{ input.percentage.replace('.', ',') }}%</span> <span class="text-glob">  percentage</span> </h1>
     <h1 class="cifras-glob" style="margin-left: 1.5rem;"><span class="badge badge-secondary">1 / {{ input.relation  | number:'1.0-0' }}</span> <span class="text-glob">  relation</span> </h1>
 </div>
+<span *ngIf = "this.covid.TITULO_DEFAULT !== input.titulo"> digo algo aqui</span>
 
