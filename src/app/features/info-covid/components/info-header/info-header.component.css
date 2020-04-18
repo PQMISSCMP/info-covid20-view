@@ -20,3 +20,8 @@ p{
     color: steelblue;
     margin-bottom: -4px;
 }
+
+.glosa-header{
+    color: lightslategrey;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
