@@ -63,7 +63,9 @@ export class ResumeComponent implements OnInit {
       this.covidService.country.subscribe(async data => {
           let curvaCont: number[] = [];
           if ( data.country !== '/') {
+            setTimeout(_ => { this.spinner.show(); }, 10);
             curvaCont = (await this.covidService.getCurvaContagios(data.country))[0].valores;
+            setTimeout(_ => { this.spinner.hide(); }, 10);
             // console.log('curvaCont', curvaCont);
 
           }
