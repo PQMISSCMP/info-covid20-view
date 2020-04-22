@@ -11,6 +11,7 @@
     "e2e": "ng e2e",
     "config": "heroku config -a info-covid20-view",
     "log": "heroku logs -a info-covid20-view --tail",
+    "bash": "heroku run bash --app info-covid20-view",
     "docker-build": "docker build -t info-covid20-view .",
     "docker-tag": "docker tag info-covid20-view registry.heroku.com/info-covid20-view/web",
     "docker": "npm run docker-build && docker run -p 3000:3000 info-covid20-view",
