@@ -22,6 +22,7 @@ ARG APP=corona
 ENV APP ${APP}
 WORKDIR /usr/src/app
 COPY package*.json ./
+RUN npm install -g @angular/cli@latest
 RUN npm install
 COPY . .
 RUN npm run build
