@@ -13,14 +13,15 @@ export class GraficoBarResumeComponent implements OnChanges {
   decesos: CasosResume[] = [];
   porcentagesUp: CasosResume[] = [];
   porcentagesDown: CasosResume[] = [];
+  muestraResumeLateral: boolean;
 
   constructor(private covidService: CovidService) { }
 
   ngOnChanges() {
 
     this.covidService.country.subscribe(data => {
-
         const nRegFilter = data.country === '/' ? 10000 : 1000;
+        this.muestraResumeLateral = data.country === '/' ? false : true;
         if (this.dataResume) {
           this.contagiados = this.dataResume.sort((a, b) => b.totalContagiados - a.totalContagiados).slice(0, 10);
           this.decesos = this.dataResume.sort((a, b) => b.totalDecesos - a.totalDecesos).slice(0, 10);

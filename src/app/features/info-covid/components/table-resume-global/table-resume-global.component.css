@@ -71,12 +71,18 @@ th{
 
 .sube {
   color: red; 
-  font-size: 20px;
+  margin: 0;
+  padding: 0;
+  margin-top: -8px;
+  font-size: 15px;
 }
 
 .baja{
   color: green; 
-  font-size: 20px;
+  margin: 0;
+  padding: 0;
+  margin-top: -8px;
+  font-size: 15px;
 }
 
 .table-striped{

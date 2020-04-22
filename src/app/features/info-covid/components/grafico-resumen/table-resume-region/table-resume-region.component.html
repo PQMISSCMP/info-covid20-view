@@ -1,0 +1,35 @@
+<p style="margin-top: 60px;" class="h5">Otros países de la región</p>
+
+<div  style="line-height: 0.7">
+  <table class="table table-striped table-hover ">
+    <thead>
+      <tr>
+        <th scope="col" sortable="country" (sort)="onSort($event)">País</th>
+        <th scope="col" sortable="tinfected" (sort)="onSort($event)">Confirmados</th>
+        <th scope="col" sortable="tdead" (sort)="onSort($event)">Decesos</th>
+        <th scope="col" sortable="porcent" (sort)="onSort($event)"> % </th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- *ngFor="let item of items | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize" -->
+
+      <tr *ngFor="let resume of actualizacionesResume | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize">
+        <td scope="row" style="width: 160px;"><a routerLink="/pais/{{ resume.lugar }}">{{ resume.lugar }}</a></td>
+        <td>
+          <ngb-highlight [result]="resume.totalContagiados | number"></ngb-highlight>
+        </td>
+        <td>
+          <ngb-highlight [result]="resume.totalDecesos | number"></ngb-highlight>
+        </td>
+        <td>
+          <ngb-highlight [result]="resume.porcent | number"></ngb-highlight>%
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="d-flex justify-content-between p-2">
+    <ngb-pagination [collectionSize]="actualizacionesResume.length" [(page)]="page" [pageSize]="pageSize"> </ngb-pagination>
+  </div>
+
+</div>

@@ -30,33 +30,43 @@ export class GraficoContagiadosComponent implements OnChanges {
   chartColorsContagiados: Color[] = [
     {
       backgroundColor: [
-        'rgb(155, 250, 180)',
-        'rgb(155, 240, 180)',
-        'rgb(155, 230, 180)',
-        'rgb(155, 220, 180)',
-        'rgb(155, 210, 180)',
-        'rgb(155, 200, 180)',
-        'rgb(155, 190, 180)',
-        'rgb(155, 180, 180)',
-        'rgb(155, 170, 180)',
-        'rgb(155, 160, 180)',
-        // 'rgb(155, 241, 180)',
-        // 'rgb(155, 221, 180)',
-        // 'rgb(155, 201, 180)',
-        // 'rgb(155, 181, 180)',
-        // 'rgb(155, 161, 180)',
-        // 'rgb(155, 141, 180)',
-        // 'rgb(155, 121, 180)',
-        // 'rgb(155, 101, 180)',
-        // 'rgb(155, 81, 180)',
-        // 'rgb(155, 61, 180)',
+        'rgb(136, 138, 144)',
+        'rgb(146, 138, 144)',
+        'rgb(156, 138, 144)',
+        'rgb(166, 138, 144)',
+        'rgb(176, 138, 144)',
+        'rgb(186, 138, 144)',
+        'rgb(196, 138, 144)',
+        'rgb(206, 138, 144)',
+        'rgb(216, 138, 144)',
+        'rgb(226, 138, 144)',
       ],
       borderColor: 'rgba(200, 99, 132, .7)',
       borderWidth: 1,
     }
   ];
 
-
+          // 'rgb(155, 250, 180)',
+          // 'rgb(155, 240, 180)',
+          // 'rgb(155, 230, 180)',
+          // 'rgb(155, 220, 180)',
+          // 'rgb(155, 210, 180)',
+          // 'rgb(155, 200, 180)',
+          // 'rgb(155, 190, 180)',
+          // 'rgb(155, 180, 180)',
+          // 'rgb(155, 170, 180)',
+          // 'rgb(155, 160, 180)',
+          // 'rgb(155, 241, 180)',
+          // 'rgb(155, 221, 180)',
+          // 'rgb(155, 201, 180)',
+          // 'rgb(155, 181, 180)',
+          // 'rgb(155, 161, 180)',
+          // 'rgb(155, 141, 180)',
+          // 'rgb(155, 121, 180)',
+          // 'rgb(155, 101, 180)',
+          // 'rgb(155, 81, 180)',
+          // 'rgb(155, 61, 180)',
+  
   ngOnChanges() {
 
     if (typeof this.dataContagiados !== 'undefined') {
@@ -74,7 +84,7 @@ export class GraficoContagiadosComponent implements OnChanges {
           this.labelsPaisContagiados.push(report.lugar);
         });
 
-        this.ChartDataContagiados = [{data: this.cContagiadosPais, label: 'Nº infected per country', barPercentage: 0.5}];
+        this.ChartDataContagiados = [{data: this.cContagiadosPais, label: 'Nº confirmado por país', barPercentage: 0.5}];
         this.ChartLabelsContagiados = this.labelsPaisContagiados;
 
         this.spinner.hide();

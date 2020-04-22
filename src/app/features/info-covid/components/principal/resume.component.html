@@ -1,0 +1,10 @@
+<ngx-spinner name="loadPrincipal" bdColor = "rgba(235,243,246,0.8)" color = "#4851bf" type = "ball-atom" size = "default" ></ngx-spinner>
+<ngx-spinner name="loadCountry" bdColor = "rgba(235,243,246,0.8)" color = "#4851bf" type = "ball-atom" size = "default" ></ngx-spinner>
+  
+<div *ngIf="actualizacionesResume.length > 0">
+
+  <app-info-header [input]="dataInputHeader"></app-info-header>
+  <app-table-resume-global *ngIf="!countrySelted" [actualizacionesResume] = "actualizacionesResume"></app-table-resume-global>
+  <app-info-country *ngIf="countrySelted" [inputCountry]="inputCountry" ></app-info-country>
+
+</div>

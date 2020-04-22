@@ -63,6 +63,7 @@ export interface InputSelectCountry {
     percentages: PercentageModel[];
     dataSubRegion: CasosResume[];
     curvaContagios: number[];
+    curvaDecesos: number[];
 }
 
 
@@ -74,5 +75,12 @@ export interface SelectCountry {
 
 export interface CurvaContagiados {
     lugar: string;
-    valores: number[];
+    curvaContagios: CurvasPais[];
+    curvaDecesos: CurvasPais[];
+}
+
+
+export interface CurvasPais {
+    valor: number;
+    fecha: string;
 }

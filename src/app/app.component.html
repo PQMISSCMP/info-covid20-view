@@ -1,11 +1,15 @@
 
 <div class="container">
-    <div style="width: 760px;">
+    <div style="width: 770px;">
         <app-resume (proveerGraficos)="onProveerGraficos($event)"></app-resume>
     </div>
     
-    <div style="margin-left: 30px; width: 0%;">
+    <div style="margin-left: 30px">
         <!-- <router-outlet></router-outlet> -->
         <app-grafico-bar-resume [dataResume] = "dataResume"></app-grafico-bar-resume>
     </div>
+</div>
+<div style="text-align: center; margin-top: 180px;">
+    <!-- <hr> -->
+    Copyright L.F.E 2020
 </div>

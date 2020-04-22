@@ -1,0 +1,12 @@
+
+<div class="chart-wrapper" *ngIf="dataCurvaDecesos.length > 0">
+  <canvas baseChart 
+      [datasets]="ChartDataPorcentages" 
+      [labels]="ChartLabelsPorcentages" 
+      [options]="ChartOptions"
+      [colors]="chartColorsPorcent" 
+      [legend]="ChartLegend" 
+      [chartType]="ChartType" 
+      [plugins]="ChartPlugins">
+  </canvas>
+</div>

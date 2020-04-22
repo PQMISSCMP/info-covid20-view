@@ -3,13 +3,13 @@ import { ChartDataSets } from 'chart.js';
 import { Color, Label } from 'ng2-charts';
 
 @Component({
-  selector: 'app-curva-contagios',
-  templateUrl: './curva-contagios.component.html',
-  styleUrls: ['./curva-contagios.component.css']
+  selector: 'app-curva-decesos',
+  templateUrl: './curva-decesos.component.html',
+  styleUrls: ['./curva-decesos.component.css']
 })
-export class CurvaContagiosComponent implements OnChanges {
+export class CurvaDecesosComponent implements OnChanges {
 
-  @Input() dataCurvaContagios: any[];
+  @Input() dataCurvaDecesos: any[];
 
   ChartLegend = true;
   ChartPlugins = [];
@@ -51,9 +51,9 @@ export class CurvaContagiosComponent implements OnChanges {
 
 
   ngOnChanges() {
-    if (typeof this.dataCurvaContagios !== 'undefined') {
-        this.ChartDataPorcentages = [{ data: this.dataCurvaContagios, label: 'Curva de contagios por actualizaciones instantaneas' }];
-        this.ChartLabelsPorcentages = this.dataCurvaContagios;
+    if (typeof this.dataCurvaDecesos !== 'undefined') {
+        this.ChartDataPorcentages = [{ data: this.dataCurvaDecesos, label: 'Curva de decesos ' }];
+        this.ChartLabelsPorcentages = this.dataCurvaDecesos;
 
     }
 

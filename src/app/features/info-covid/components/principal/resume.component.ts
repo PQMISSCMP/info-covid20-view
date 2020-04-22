@@ -1,11 +1,12 @@
 import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { CovidService } from '../../services/covid.service';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { CasosResume, InfoHeader, InputSelectCountry } from '../../model/interfaces';
-import { Observable } from 'rxjs';
+import { CasosResume, InfoHeader, InputSelectCountry, CurvasPais } from '../../model/interfaces';
 import { ProgressSpinnerMode } from '@angular/material/progress-spinner';
 import { ThemePalette } from '@angular/material/core';
-
+import { NavigationStart, Router } from '@angular/router';
+import { Location } from '@angular/common'; 
+import { distinctUntilChanged } from 'rxjs/operators';
 
 @Component({
   selector: 'app-resume',
@@ -25,12 +26,20 @@ export class ResumeComponent implements OnInit {
   actualizacionesResumeBck: CasosResume[] = [];
   @Output() proveerGraficos = new EventEmitter<CasosResume[]>();
 
-  constructor(public covidService: CovidService, private spinner: NgxSpinnerService ) { }
+  constructor(public covidService: CovidService, private spinner: NgxSpinnerService, private router: Router ) {
+    router.events.subscribe(evento => {
+        if (evento instanceof NavigationStart && !router.navigated) {
+          if (evento.url !== '/') {
+            location.href = '/';
+          }
+        }
+    });
+  }
 
   async ngOnInit() {
 
     try {
-      setTimeout(_ => { this.spinner.show(); }, 10);
+      setTimeout(_ => { this.spinner.show('loadPrincipal'); }, 10);
       const list = await this.covidService.getHistoryList();
 
       if (typeof list === 'undefined') { throw new Error('Error al obtener los datos'); }
@@ -57,29 +66,31 @@ export class ResumeComponent implements OnInit {
 
       this.actualizacionesResume = this.actualizacionesResume.sort((a, b) => b.totalContagiados - a.totalContagiados);
       this.actualizacionesResumeBck = this.actualizacionesResume;
+      this.dataInputHeader = this.getInfoHeader(list, this.covidService.TITULO_DEFAULT);
 
-      this.dataInputHeader = this.getInfoHeader(list, 'Information of the COVID-19 virus in the world');
-
-      this.covidService.country.subscribe(async data => {
-          let curvaCont: number[] = [];
+      this.covidService.country
+        .pipe(distinctUntilChanged((prev, curr) => prev.country === curr.country))
+        .subscribe(async data => {
+          let curvaCont: CurvasPais[] = [];
+          let curvaDec: CurvasPais[] = [];
+          setTimeout(_ => { this.spinner.show('loadCountry'); }, 10);
           if ( data.country !== '/') {
-            setTimeout(_ => { this.spinner.show(); }, 10);
-            curvaCont = (await this.covidService.getCurvaContagios(data.country))[0].valores;
-            setTimeout(_ => { this.spinner.hide(); }, 10);
-            // console.log('curvaCont', curvaCont);
+            console.log("data.country: ", data.country);
 
+            const { ...vars } = (await this.covidService.getCurvaContagios(data.country))[0];
+            curvaCont = vars.curvaContagios;
+            curvaDec = vars.curvaDecesos;
           }
-
           this.countrySelted = data.flagSelected;
-          this.cargaInfoCountry(data.country, curvaCont.filter(num => num > 0));
+          this.cargaInfoCountry(data.country, curvaCont.map(a => a.valor).filter(num => num > 0), curvaDec.map(a => a.valor).filter(num => num > 0));
+          setTimeout(_ => { this.spinner.hide('loadCountry'); }, 10);
       });
 
-      setTimeout(_ => { this.spinner.hide(); }, 10);
+      setTimeout(_ => { this.spinner.hide('loadPrincipal'); }, 10);
       this.onProveerGraficos();
     } catch (error) {
       console.log(error);
-      this.ngOnInit();
-      // alert(error.message);
+      alert(error.message);
     }
   }
 
@@ -89,7 +100,7 @@ export class ResumeComponent implements OnInit {
 
 
 
-  cargaInfoCountry(country: string, curvaContagios: number[]) {
+  cargaInfoCountry(country: string, curvaContagios: number[], curvaDecesos: number[]) {
 
     if (country === '/') {
         this.actualizacionesResume = this.actualizacionesResumeBck;
@@ -117,7 +128,7 @@ export class ResumeComponent implements OnInit {
         const percentages = this.actualizacionesResumeBck.find(pais => pais.lugar === country).percentages;
         const resumeRegion = this.actualizacionesResumeBck.filter(el => continente.includes(el.lugar));
         this.actualizacionesResume = resumeRegion;
-        this.inputCountry = { dataSubRegion: resumeRegion, percentages, curvaContagios};
+        this.inputCountry = { dataSubRegion: resumeRegion, percentages, curvaContagios, curvaDecesos};
 
     }
 

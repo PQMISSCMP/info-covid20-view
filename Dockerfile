@@ -29,8 +29,8 @@ RUN npm run build
 
 # stage 2 
 FROM nginx
-EXPOSE 3000
-EXPOSE $PORT
+# EXPOSE 3000
+# EXPOSE $PORT
 # RUN rm -rf /usr/share/nginx/html/*
 COPY --from=node /usr/src/app/dist/${APP} /usr/share/nginx/html
 COPY ./nginx.conf /etc/nginx/conf.d/default.conf

@@ -9,7 +9,7 @@ import { InputSelectCountry } from '../../model/interfaces';
 export class InfoCountryComponent {
 
   @Input() inputCountry: InputSelectCountry;
-  constructor() { }
 
+  constructor() { }
 
 }

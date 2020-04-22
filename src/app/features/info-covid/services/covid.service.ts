@@ -9,8 +9,9 @@ import { BehaviorSubject, Observable, Subject } from 'rxjs';
 export class CovidService {
 
   URL_API = 'https://api-coronatracing.herokuapp.com';
-  TITULO_DEFAULT = 'Information of the COVID-19 virus in the world';
-  asia = ['Tajikistan','Azerbaijian', 'Uzbekistán', 'West Bank and Gaza Strip', 'Macau', 'Hong Kong', 'East Timor', 'Palestinian territories', 'Afghanistan', 'Armenia', 'Azerbaijan', 'Bahrain',  'Bangladesh',  'Bhutan',  'Brunei',  'Cambodia',  'China',  'Cyprus',  'Georgia',  'India',  'Indonesia',  'Iran',  'Iraq',  'Israel',  'Japan', , 'Jordan',  'Kazakhstan',  'Kuwait',  'Kyrgyzstan',  'Laos',  'Lebanon',  'Malaysia',  'Maldives',  'Mongolia',  'Myanmar',  'Nepal',  'North Korea',  'Oman',  'Pakistan',  'Palestine',  'Philippines',  'Qatar',  'Russia',  'Saudi Arabia',  'Singapore',  'South Korea',  'Sri Lanka',  'Syria',  'Taiwan',  'Tajikistan',  'Thailand',  'Timor-Leste',  'Turkey',  'Turkmenistan',  'United Arab Emirates',  'Uzbekistan',  'Vietnam',  'Yemen'];
+  TITULO_DEFAULT = 'Información del COVID-19 (coronavirus)';
+
+  asia = ['Tajikistan', 'Azerbaijian', 'Uzbekistán', 'West Bank and Gaza Strip', 'Macau', 'Hong Kong', 'East Timor', 'Palestinian territories', 'Afghanistan', 'Armenia', 'Azerbaijan', 'Bahrain',  'Bangladesh',  'Bhutan',  'Brunei',  'Cambodia',  'China',  'Cyprus',  'Georgia',  'India',  'Indonesia',  'Iran',  'Iraq',  'Israel',  'Japan', , 'Jordan',  'Kazakhstan',  'Kuwait',  'Kyrgyzstan',  'Laos',  'Lebanon',  'Malaysia',  'Maldives',  'Mongolia',  'Myanmar',  'Nepal',  'North Korea',  'Oman',  'Pakistan',  'Palestine',  'Philippines',  'Qatar',  'Russia',  'Saudi Arabia',  'Singapore',  'South Korea',  'Sri Lanka',  'Syria',  'Taiwan',  'Tajikistan',  'Thailand',  'Timor-Leste',  'Turkey',  'Turkmenistan',  'United Arab Emirates',  'Uzbekistan',  'Vietnam',  'Yemen'];
   sudamerica = ['Chile', 'Ecuador', 'Bolivia', 'Brazil', 'Argentina', 'Colombia', 'Uruguay', 'Peru', 'Paraguay', 'Venezuela', 'Guyana', 'Suriname', 'Trinidad and Tobago', 'French Guiana', 'Falkland Islands'];
   europa = ['Bosnia', 'Vatican City', 'Gibraltar', 'Faroe Islands', 'Liechtenstein', 'Isle of Man', 'Kosovo', 'Channel Islands', 'Czech Republic', 'Guernsey', 'Albania', 'Andorra', 'Austria', 'Belarus', 'Belgium', 'Bosnia and Herzegovina', 'Bulgaria', 'Croatia', 'Cyprus', 'Czechia', 'Denmark', 'Estonia', 'Finland', 'France', 'Georgia', 'Germany', 'Greece', 'Hungary', 'Iceland', 'Ireland', 'Italy', 'Latvia', 'Lithuania', 'Luxembourg', 'Malta', 'Monaco', 'Montenegro', 'Netherlands', 'North Macedonia', 'Norway', 'Poland', 'Portugal', 'Moldova', 'Romania', 'San Marino', 'Serbia', 'Slovakia', 'Slovenia', 'Spain', 'Sweden', 'Switzerland', 'Turkey',  'Ukraine', 'United Kingdom'];
   norteAmerica = ['Antigua and Barbuda',  'Bahamas',  'Barbados',  'Belize',  'Canada',  'Costa Rica',  'Cuba',  'Dominica',  'Dominican Republic',  'El Salvador',  'Grenada',  'Guatemala',  'Haiti',  'Honduras',  'Jamaica',  'Mexico',  'Nicaragua',  'Panama',  'Saint Kitts and Nevis',  'Saint Lucia',  'Saint Vincent and the Grenadines',  'United States', 'Anguilla',  'Aruba',  'Bermuda',  'British Virgin Islands',  'Cayman Islands',  'Curacao',  'Greenland',  'Guadeloupe',  'Martinique',  'Montserrat',  'Puerto Rico', 'Saint Barthelemy',  'Saint Martin', 'Saint Pierre and Miquelon',  'Sint Eustatius',  'Sint Maarten',  'Turks and Caicos',  'US Virgin Islands'];
@@ -34,8 +35,8 @@ export class CovidService {
       const result: CasosResume[] = await (await request.get(`${this.URL_API}/cases`)).data;
       return result;
     } catch (error) {
-      console.log('reintentando....');
-      this.getHistoryList();
+      // console.log('reintentando....');
+      // this.getHistoryList();
       throw error.message;
     }
   }
@@ -45,8 +46,8 @@ export class CovidService {
       const result: CurvaContagiados[] = await (await request.get(`${this.URL_API}/report/${country}`)).data;
       return result;
     } catch (error) {
-      console.log('reintentando....');
-      this.getCurvaContagios(country);
+      // console.log('reintentando....');
+      // this.getCurvaContagios(country);
       throw error.message;
     }
   }
@@ -70,7 +71,7 @@ export class CovidService {
     }
 
     if (dias === 0 && horas === 0) {
-      glosa = `an instant`;
+      glosa = `recién`;
     }
     return glosa;
 }

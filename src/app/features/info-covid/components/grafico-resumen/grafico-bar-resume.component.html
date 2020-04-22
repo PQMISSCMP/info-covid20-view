@@ -1,6 +1,8 @@
 
 <div class="chart-wrapper" >
 
+    <!-- <app-table-resume-region  [actualizacionesResume] = "dataResume" ></app-table-resume-region> -->
+    <app-table-resume-region *ngIf="muestraResumeLateral" [actualizacionesResume] = "dataResume" ></app-table-resume-region>
     <app-grafico-contagiados [dataContagiados] = "contagiados"></app-grafico-contagiados>
     <app-grafico-decesos [dataDecesos] = "decesos"></app-grafico-decesos>
     <app-grafico-porcentage-up [dataPorcentagesUp] = "porcentagesUp"></app-grafico-porcentage-up>

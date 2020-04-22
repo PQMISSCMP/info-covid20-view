@@ -34,8 +34,8 @@ export class GraficoPorcentageUpComponent implements OnChanges {
 
   chartColorsPorcent: Color[] = [
     {
-      backgroundColor: ['rgb(255, 128, 0)'],
-      borderColor: 'rgba(255, 128, 0)',
+      backgroundColor: ['rgb(80, 241, 180)'],
+      borderColor: 'rgba(200, 99, 132, .7)',
       borderWidth: 2,
     }
   ];
@@ -44,7 +44,6 @@ export class GraficoPorcentageUpComponent implements OnChanges {
   ngOnChanges() {
 
     if (typeof this.dataPorcentagesUp !== 'undefined') {
-        // console.log(this.dataPorcentagesUp);
 
         this.cPorcentagesPais = [];
         this.labelsPorcentages = [];
@@ -54,7 +53,7 @@ export class GraficoPorcentageUpComponent implements OnChanges {
         this.cPorcentagesPais = Porcentages.map(({porcent}) => porcent);
         this.labelsPorcentages = Porcentages.map(({lugar}) => lugar);
 
-        this.ChartDataPorcentages = [{ data: this.cPorcentagesPais, label: 'Worst % over threshold confirmed', barPercentage: 0.5}];
+        this.ChartDataPorcentages = [{ data: this.cPorcentagesPais, label: 'Paises donde tasas de mortalidad son más altas', barPercentage: 0.5}];
         this.ChartLabelsPorcentages = this.labelsPorcentages;
 
     }

@@ -2,17 +2,17 @@
     <!-- <p class="h2"> {{ input.titulo }} </p>  -->
     <!-- <a routerLink="/"><span style="size: 50px;" class="material-icons">keyboard_return</span></a> -->
 <!-- </div> -->
-<p class="h2"> {{ input.titulo }} </p> 
-<div ngbTooltip="Cifras globales aproximadas" class="card-header bg-info text-white d-flex info-header">
-    <h1 class="cifras-glob"><span class="badge badge-secondary">{{ input.totalInfected | number:'1.0-0' }}</span> <span class="text-glob"> total infected</span> </h1>
-    <h1 class="cifras-glob" style="margin-left: 1.5rem;"><span class="badge badge-secondary">{{ input.totalDead | number:'1.0-0' }}</span> <span class="text-glob"> total dead</span> </h1>
-    <h1 class="cifras-glob" style="margin-left: 1.5rem;"><span class="badge badge-secondary">{{ input.percentage.replace('.', ',') }}%</span> <span class="text-glob">  percentage</span> </h1>
-    <h1 class="cifras-glob" style="margin-left: 1.5rem;"><span class="badge badge-secondary">1 / {{ input.relation  | number:'1.0-0' }}</span> <span class="text-glob">  relation</span> </h1>
+<p class="h3"> {{ input.titulo }} </p> 
+<div ngbTooltip="Cifras globales aproximadas" style="padding: .6rem; padding-left: 1rem;" class="card-header bg-info text-white d-flex info-header">
+    <h1 class="cifras-glob"><span class="badge badge-secondary">{{ input.totalInfected | number:'1.0-0' }}</span> <span class="text-glob"> total confirmados</span> </h1>
+    <h1 class="cifras-glob" style="margin-left: 1rem;"><span class="badge badge-secondary">{{ input.totalDead | number:'1.0-0' }}</span> <span class="text-glob"> total decesos</span> </h1>
+    <h1 class="cifras-glob" style="margin-left: 1.5rem;"><span title="Tasa de letalidad" class="badge badge-secondary">{{ input.percentage.replace('.', ',') }}%</span> <span class="text-glob">  tasa</span> </h1>
+    <h1 class="cifras-glob" style="margin-left: 1.5rem;"><span class="badge badge-secondary">1 / {{ input.relation  | number:'1.0-0' }}</span> <span class="text-glob">  relación</span> </h1>
 </div>
 
 <span class="glosa-header" *ngIf = "this.covid.TITULO_DEFAULT !== input.titulo"> 
 <b>{{ input.titulo }}</b>,  tiene un total de <b>{{ input.totalInfected | number:'1.0-0' }}</b>  
 casos confirmados, de estos <b>{{ input.totalDead | number:'1.0-0' }}</b> han perecido dando una tasa de mortalidad del 
-<b>{{ input.percentage.replace('.', ',') }} % </b>(porciento) y una relación de <b>1</b> persona fallecida por <b>{{ input.relation  | number:'1.0-0' }}</b> contagiadas.
+<b>{{ input.percentage.replace('.', ',') }} % </b>(porciento) y una relación de <b>1</b> persona fallecida por cada <b>{{ input.relation  | number:'1.0-0' }}</b> contagiadas.
 </span>
 
