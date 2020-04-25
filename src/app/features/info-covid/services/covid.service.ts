@@ -8,7 +8,7 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class CovidService {
 
-  URL_API = '/api';
+  URL_API = '/api/';
   TITULO_DEFAULT = 'Información del COVID-19 (coronavirus)';
 
   asia = ['Tajikistan', 'Azerbaijian', 'Uzbekistán', 'West Bank and Gaza Strip', 'Macau', 'Hong Kong', 'East Timor', 'Palestinian territories', 'Afghanistan', 'Armenia', 'Azerbaijan', 'Bahrain',  'Bangladesh',  'Bhutan',  'Brunei',  'Cambodia',  'China',  'Cyprus',  'Georgia',  'India',  'Indonesia',  'Iran',  'Iraq',  'Israel',  'Japan', , 'Jordan',  'Kazakhstan',  'Kuwait',  'Kyrgyzstan',  'Laos',  'Lebanon',  'Malaysia',  'Maldives',  'Mongolia',  'Myanmar',  'Nepal',  'North Korea',  'Oman',  'Pakistan',  'Palestine',  'Philippines',  'Qatar',  'Saudi Arabia',  'Singapore',  'South Korea',  'Sri Lanka',  'Syria',  'Taiwan',  'Tajikistan',  'Thailand',  'Timor-Leste',  'Turkey',  'Turkmenistan',  'United Arab Emirates',  'Uzbekistan',  'Vietnam',  'Yemen'];
