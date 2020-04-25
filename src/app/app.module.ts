@@ -5,18 +5,14 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ChartsModule } from 'ng2-charts';
 import { NgxSpinnerModule, NgxSpinnerService } from 'ngx-spinner';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
-// import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
-
 
 import { CovidService } from './features/info-covid/services/covid.service';
-import { CountryService } from './features/info-covid/services/table.services';
 
 import { AppComponent } from './app.component';
 import { GlobalMapComponent } from './features/info-covid/components/global-map/global-map.component';
 import { ResumeComponent } from './features/info-covid/components/principal/resume.component';
 import { GraficoBarResumeComponent } from './features/info-covid/components/grafico-resumen/grafico-bar-resume.component';
 import { DecimalPipe } from '@angular/common';
-import { NgbdSortableHeader } from './features/info-covid/directives/sortable.directive';
 
 import { InfoHeaderComponent } from './features/info-covid/components/info-header/info-header.component';
 import { TableResumeComponent } from './features/info-covid/components/table-resume-global/table-resume-global.component';
@@ -37,7 +33,6 @@ import { TableResumeRegionComponent } from './features/info-covid/components/gra
     GlobalMapComponent,
     ResumeComponent,
     GraficoBarResumeComponent,
-    NgbdSortableHeader,
     GraficoContagiadosComponent,
     GraficoDecesosComponent,
     GraficoPorcentageUpComponent,
@@ -58,7 +53,7 @@ import { TableResumeRegionComponent } from './features/info-covid/components/gra
     NgxSpinnerModule,
     NgbModule
   ],
-  providers: [CovidService, CountryService, DecimalPipe, NgxSpinnerService],
+  providers: [CovidService, DecimalPipe, NgxSpinnerService],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

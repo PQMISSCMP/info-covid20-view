@@ -1,7 +1,11 @@
-<p style="margin-top: 60px;" class="h5">Otros países de la región</p>
+<div class = "titulo">
+  <p style="display: inline-block; margin-top: 60px" class="h5">Otros países de la región</p>
+  <a routerLink="/" style="margin-left: 7rem;"> <img style="display: inline-block;" title="Volver a pagina principal"
+      style="width: 1.5rem; height: 1.5rem;" src="../../../../../../assets/back.png" /> </a>
+</div>
 
-<div  style="line-height: 0.7">
-  <table class="table table-striped table-hover ">
+<div style="line-height: 0.7">
+  <table class="table table-striped table-hover " style="width: 100%;">
     <thead>
       <tr>
         <th scope="col" sortable="country" (sort)="onSort($event)">País</th>
@@ -29,7 +33,8 @@
   </table>
 
   <div class="d-flex justify-content-between p-2">
-    <ngb-pagination [collectionSize]="actualizacionesResume.length" [(page)]="page" [pageSize]="pageSize"> </ngb-pagination>
+    <ngb-pagination [collectionSize]="actualizacionesResume.length" [(page)]="page" [pageSize]="pageSize">
+    </ngb-pagination>
   </div>
 
 </div>

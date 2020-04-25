@@ -1,4 +1,4 @@
-import {SortColumn, SortDirection} from '../directives/sortable.directive';
+
 
 export interface ResponseDataChart {
     Contagiados: number[];
@@ -34,14 +34,6 @@ export interface Actualizacion {
 export interface SearchResult {
     resumes: CasosResume[];
     total: number;
-}
-
-export interface State {
-    page?: number;
-    pageSize?: number;
-    searchTerm?: string;
-    sortColumn: SortColumn;
-    sortDirection: SortDirection;
 }
 
 export interface PercentageModel {
