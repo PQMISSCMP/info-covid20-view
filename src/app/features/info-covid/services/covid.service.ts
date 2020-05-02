@@ -43,7 +43,7 @@ export class CovidService {
 
   async getCurvaContagios(country: string): Promise <CurvaContagiados[]> {
     try {
-      const result: CurvaContagiados[] = await (await request.get(`${this.URL_API}/report/${country}`)).data;
+      const result: CurvaContagiados[] = await (await request.get(`${this.URL_API}/resumes/${country}`)).data;
       return result;
     } catch (error) {
       // console.log('reintentando....');
